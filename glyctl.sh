@@ -3,9 +3,9 @@
 #####################################################################################
 # Copyright Glyfo Company. 2020. All Rights Reserved.                               #
 # Licensed under the MIT license. See LICENSE file in the project root for details. #
-# solana  : Solana Container Tools                                                  #
+# name    : Glyfo Command Line Tool to improve Sofware Development on Solana        #
 # website : glyfo.com                                                               #
-# mail    : hello@glyfo.com                                                         #
+# support : hello@glyfo.com                                                         #
 #####################################################################################
 
 # ---------------------- README ---------------------------------

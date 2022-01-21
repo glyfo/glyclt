@@ -12,7 +12,7 @@ Command Line Tool to compile/deploy Smart Contract on Solana
 
 ```console
 $ git clone https://github.com/glyfo/solana-quickstart
-$ chmod +x glyctl.sh
+$ cd solana-quickstart ; chmod +x glyctl.sh
 $ ./glyctl.sh
 Usage: ./glyctl.sh [setup|wallet|airdrop|compile|deploy|delete]
 ```

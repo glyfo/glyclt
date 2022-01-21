@@ -43,7 +43,5 @@ Summary:
 
 [Post Ticket System using Solana](https://www.fmendez.com/building-a-simple-on-chain-point-of-sale-with-solana-anchor-and-react)
 
-[Counter system using Solana](https://www.brianfriel.xyz/learning-how-to-build-on-solana/)
-
 
 

@@ -20,14 +20,19 @@ Usage: ./glyctl.sh [setup|wallet|airdrop|compile|deploy|delete]
 Summary:
 
 ```console
-+ setup   : take a Rust imagen from Docker Hub and added Toolset to compile smart contract.
++ setup   : Using Rust Imagen from Docker Hub to added Base & Solana tools to compile smart contract.
 + wallet  : create a wallet to deploy smart contract on solana
-+ airdrop : airdrop to wallet sol 
-+ compile : using to compile smart contract 
-+ deploy  : deploy on chain the smart contract ( the default chain is devnet)
++ airdrop : Sol airdrop to wallet 
++ compile : compile smart contract 
++ deploy  : deploy smart contract on solana
 ```
-## Solana Concept 
+## Solana Fundamentals
 
++ All is a Account 
++ All Smart Program are Stateless 
++ Data & Program are separete 
++ System Program support Account creation
++ Token Program support Token creation. ( Funglble & No-Fungible support )
 
 
 ## Reference

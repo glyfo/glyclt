@@ -35,13 +35,14 @@ docker exec -i solanaX /bin/bash -s <<EOF
   npm i -g @project-serum/anchor-cli
   curl -sSfL https://release.solana.com/v1.8.13/install | bash - > /dev/null
   export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
-  echo '-----------------------Version----------------------------'
-  rustc -V
+  echo '----------------------- Base Toolset --------------------'
+  rustc -V 
   cargo -V
   node -v
   npm -v
-  solana -V
   git --version
+  echo '----------------------- Solana Toolset --------------------'
+  solana -V
   solana-keygen --version
   anchor --version
   exit

@@ -1,0 +1,18 @@
+[package]
+name = "solana counte"
+version = "0.1.0"
+description = "Counter the Vote"
+edition = "2022"
+
+[lib]
+crate-type = ["cdylib", "lib"]
+name = "solana counter"
+
+[features]
+no-entrypoint = []
+no-idl = []
+cpi = ["no-entrypoint"]
+default = []
+
+[dependencies]
+anchor-lang = "0.16.0"

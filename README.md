@@ -12,12 +12,16 @@ Command Line Tool to compile/deploy Smart Contract on Solana
 $ ./glyctl.sh
 Usage: ./glyctl.sh [setup|wallet|airdrop|compile|deploy|delete]
 ```
+
+Summary:
+
+```pre
 + setup   : take a Rust imagen from Docker Hub and added Toolset to compile smart contract.
 + wallet  : create a wallet to deploy smart contract on solana
 + airdrop : airdrop to wallet sol 
 + compile : using to compile smart contract 
 + deploy  : deploy on chain the smart contract ( the default chain is devnet)
-
+```
 # Solana Concept 
 
 

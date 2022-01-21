@@ -85,9 +85,8 @@ git clone https://github.com/solana-labs/example-helloworld.git
 docker exec -i solanaX /bin/bash -s <<EOF
    export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
    echo "Compile example-helloworld .........."
-   cd example-helloworld
-   npm install
-   npm run build:program-rust
+   cd counter
+   anchor build
    exit
 EOF
 ;;

@@ -24,11 +24,11 @@ Summary:
 + compile : using to compile smart contract 
 + deploy  : deploy on chain the smart contract ( the default chain is devnet)
 ```
-# Solana Concept 
+## Solana Concept 
 
 
 
-# Reference
+## Reference
 
 [Solana Docs](https://docs.solana.com/)
 

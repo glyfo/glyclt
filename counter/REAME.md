@@ -1,4 +1,6 @@
-# Counter Smart Contract
+# Counter Smart Contract
+
+Smart Contract to support Vote using two options
 
 
 

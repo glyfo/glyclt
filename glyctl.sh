@@ -32,7 +32,8 @@ docker exec -i solanaX /bin/bash -s <<EOF
   apt-get update && apt-get install -y --no-install-recommends apt-utils > /dev/null
   apt-get install -y nodejs git > /dev/null
   npm install npm@latest -g > /dev/null
-  curl -sSfL https://release.solana.com/v1.8.5/install | bash - > /dev/null
+  npm i -g @project-serum/anchor-cli
+  curl -sSfL https://release.solana.com/v1.8.13/install | bash - > /dev/null
   export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
   echo '-----------------------Version----------------------------'
   rustc -V
@@ -42,6 +43,7 @@ docker exec -i solanaX /bin/bash -s <<EOF
   solana -V
   git --version
   solana-keygen --version
+  anchor --version
   exit
 EOF
 ;;

@@ -15,7 +15,7 @@ Usage: ./glyctl.sh [setup|wallet|airdrop|compile|deploy|delete]
 
 Summary:
 
-```pre
+```console
 + setup   : take a Rust imagen from Docker Hub and added Toolset to compile smart contract.
 + wallet  : create a wallet to deploy smart contract on solana
 + airdrop : airdrop to wallet sol 

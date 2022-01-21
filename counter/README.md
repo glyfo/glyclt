@@ -1,6 +1,6 @@
-# Counter Smart Contract
+# Counter Vote Smart Contract
 
-Smart Contract to support Vote using two options
+Smart Contract to support Vote using multiple options
 
 ## Reference
 

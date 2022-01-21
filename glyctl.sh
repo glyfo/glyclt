@@ -2,8 +2,8 @@
 
 #####################################################################################
 # Copyright Glyfo Company. 2020. All Rights Reserved.                               #
-# Licensed under the MIT license. See LICENSE file in the project root for details. #
-# name    : Glyfo Command Line Tool to improve Sofware Development on Solana        #
+# Apache License, Version 2.0. See LICENSE file in the project root for details.    #
+# name    : Command Line Tool to deploy Smart Contract on Solana                    #
 # website : glyfo.com                                                               #
 # support : hello@glyfo.com                                                         #
 #####################################################################################

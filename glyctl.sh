@@ -29,11 +29,11 @@ docker exec -i solanaX /bin/bash -s <<EOF
   echo '-----------------------Solana Tool------------------------'
   uname -a
   curl -fsSL https://deb.nodesource.com/setup_16.x | bash - > /dev/null
-  apt-get update && apt-get install -y --no-install-recommends apt-utils > /dev/null
+  apt-get update && apt-get upgrade & apt-get install -y pkg-config build-essential libudev-dev --no-install-recommends apt-utils > /dev/null
   apt-get install -y nodejs git > /dev/null
-  npm install npm@latest -g > /dev/null
-  npm i -g @project-serum/anchor-cli
   curl -sSfL https://release.solana.com/v1.8.13/install | bash - > /dev/null
+  cargo install --git https://github.com/project-serum/anchor --tag v0.20.1 anchor-cli --locked
+  npm install npm@latest -g > /dev/null
   export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
   echo '----------------------- Base Toolset --------------------'
   rustc -V 
@@ -79,14 +79,13 @@ docker exec -i solanaX /bin/bash -s <<EOF
 EOF
 ;;
 'compile')
-echo "Download Repo  .........."
-rm -rf example-helloworld
-git clone https://github.com/solana-labs/example-helloworld.git
+echo "Building Smart Contract .........."
 docker exec -i solanaX /bin/bash -s <<EOF
    export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
-   echo "Compile example-helloworld .........."
+   export RUST_BACKTRACE=full
+   echo "Compile Smart Contract .........."
    cd counter
-   anchor build
+   cargo build-bpf 
    exit
 EOF
 ;;

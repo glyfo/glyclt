@@ -1,12 +1,12 @@
 [package]
-name = "solana counte"
+name = "counter"
 version = "0.1.0"
-description = "Counter the Vote"
-edition = "2022"
+description = "Smart Contract Counter"
+edition = "2021"
 
 [lib]
 crate-type = ["cdylib", "lib"]
-name = "solana counter"
+name = "counter"
 
 [features]
 no-entrypoint = []

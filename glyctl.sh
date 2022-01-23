@@ -78,14 +78,14 @@ docker exec -i solanaX /bin/bash -s <<EOF
    exit
 EOF
 ;;
-'compile')
+'build')
 echo "Building Smart Contract .........."
 docker exec -i solanaX /bin/bash -s <<EOF
    export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
    export RUST_BACKTRACE=full
-   echo "Compile Smart Contract .........."
    cd counter
    cargo build-bpf 
+   anchor idl parse -f src/lib.rs -o target/idl/rcp-mapping.json
    exit
 EOF
 ;;
@@ -93,8 +93,8 @@ EOF
 echo "Deploy  .........."
 docker exec -i solanaX /bin/bash -s <<EOF
    export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
-   cd example-helloworld
-   solana program deploy -k ../walletid.json  dist/program/helloworld.so --url https://api.devnet.solana.com 
+   cd counter
+   solana program deploy -k ../walletid.json  target/deploy/counter.so --url https://api.devnet.solana.com 
    exit
 EOF
 ;;
@@ -112,6 +112,6 @@ docker stop solanaX
 docker rm solanaX
 ;;
 'help')
-echo "Usage: $0 [setup|wallet|airdrop|compile|deploy|delete]"
+echo "Usage: $0 [setup|wallet|airdrop|build|deploy|delete]"
 ;; 
 esac

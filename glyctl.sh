@@ -23,7 +23,7 @@ docker stop solanaX
 docker rm solanaX
 echo "Create Solana Container Tools .........."
 docker pull rust
-docker run --name solanaX -v $(pwd):/usr/src -w /usr/src -id rust tail -f /dev/null
+docker run  --name solanaX -v $(pwd):/usr/src -w /usr/src -id rust tail -f /dev/null
 echo "Container Conneting"
 docker exec -i solanaX /bin/bash -s <<EOF
   echo '-----------------------Solana Tool------------------------'
@@ -51,9 +51,11 @@ EOF
 ;;
 'run')
 echo "Running Node-Test Validator.........."
-docker exec -i solanaX /bin/bash -s <<EOF
+docker exec -id solanaX /bin/bash -s <<EOF
    export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
-   solana-test-validator &
+   solana-test-validator 2>  salida.out  1> salida.out &
+   sleep 2
+   cat salida.out
    exit
 EOF
 ;;
@@ -62,7 +64,7 @@ echo "Create Wallet .........."
 docker exec -i solanaX /bin/bash -s <<EOF
    export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
    echo "Wallet creation .........."
-   solana config set --url https://api.devnet.solana.com
+   solana config set --url http://localhost:8899
    solana-keygen new -f -s --no-bip39-passphrase --outfile walletid.json 
    echo '-----------------------Public Key ------------------------'
    solana-keygen pubkey walletid.json 

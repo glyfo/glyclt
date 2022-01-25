@@ -85,7 +85,7 @@ docker exec -i solanaX /bin/bash -s <<EOF
    echo "Public Key:"
    printf '%s\n' "$(solana-keygen pubkey walletid.json )" 
    echo '----------------------------------------------------------'
-   solana airdrop 1 $pubkey  walletid.json  --url https://api.devnet.solana.com
+   solana airdrop 5 $pubkey  walletid.json  --url http://localhost:8899
    exit
 EOF
 ;;

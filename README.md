@@ -47,7 +47,4 @@ Summary:
 
 [Anchor Framework](https://github.com/project-serum/anchor)
 
-[Post Ticket System using Solana](https://www.fmendez.com/building-a-simple-on-chain-point-of-sale-with-solana-anchor-and-react)
-
-
-
+[Docker] (https://docker.com)

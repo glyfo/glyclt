@@ -44,8 +44,17 @@ docker exec -i solanaX /bin/bash -s <<EOF
   echo '----------------------- Solana Toolset --------------------'
   solana -V
   solana-keygen --version
+  solana-test-validator --version
   anchor --version
   exit
+EOF
+;;
+'run')
+echo "Running Node-Test Validator.........."
+docker exec -i solanaX /bin/bash -s <<EOF
+   export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
+   solana-test-validator 
+   exit
 EOF
 ;;
 'wallet')
@@ -112,6 +121,6 @@ docker stop solanaX
 docker rm solanaX
 ;;
 'help')
-echo "Usage: $0 [setup|wallet|airdrop|build|deploy|delete]"
+echo "Usage: $0 [setup|run|wallet|airdrop|build|deploy|delete]"
 ;; 
 esac

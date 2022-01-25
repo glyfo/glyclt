@@ -53,8 +53,7 @@ EOF
 echo "Running Node-Test Validator.........."
 docker exec -id solanaX /bin/bash -s <<EOF
    export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
-   solana-test-validator &
-   netstat -an | grep 8899
+   solana-test-validator 
    exit
 EOF
 ;;

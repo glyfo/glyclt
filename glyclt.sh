@@ -26,10 +26,8 @@ docker run  --name solanaX -v $(pwd):/usr/src -w /usr/src -id rust tail -f /dev/
 docker exec -i solanaX /bin/bash -s <<EOF
   echo '----------------------- Core Tool------------------------'
   uname -a
-  dpkg --configure -a
   curl -fsSL https://deb.nodesource.com/setup_16.x | bash - > /dev/null
-  apt-get update && apt-get upgrade & apt-get install -y pkg-config build-essential libudev-dev --no-install-recommends apt-utils > /dev/null
-  apt-get install -y nodejs git > /dev/null
+  apt-get update; apt-get upgrade ; apt-get install -y pkg-config build-essential libudev-dev --no-install-recommends apt-utils > /dev/null
   export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
   echo '----------------------- Base Tools -------------------------'
   rustc -V 

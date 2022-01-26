@@ -42,7 +42,8 @@ docker exec -i solanaX /bin/bash -s <<EOF
   cd /usr/local 
   git clone https://github.com/solana-labs/solana
   cd solana
-  sh ./scripts/cargo-install-all.sh --validator-only .
+  awk '{ if (NR > 7 || NR < 14) print ""; else print $0}' ./scripts/cargo-install-all.sh > ./scripts/cargo-install-all-fix.sh
+  sh ./scripts/cargo-install-all-fix.sh --validator-only .
   cargo build --release --bin solana-test-validator
   cp target/release/solana-test-validator ./bin
   ./bin/solana -V

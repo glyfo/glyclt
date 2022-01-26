@@ -12,13 +12,13 @@
 #
 if [ "$1" = "" ]
 then
-  ./glyctl.sh help
+  ./glyclt.sh help
   exit
 fi
 
 case "$1" in
 'setup')
-echo "Building Solana Develop Enviroment"
+echo "Building Command Line Tool Enviroment"
 docker stop solanaX
 docker rm solanaX
 docker pull rust
@@ -29,13 +29,10 @@ docker exec -i solanaX /bin/bash -s <<EOF
   curl -fsSL https://deb.nodesource.com/setup_16.x | bash - > /dev/null
   apt-get update && apt-get upgrade & apt-get install -y pkg-config build-essential libudev-dev --no-install-recommends apt-utils > /dev/null
   apt-get install -y nodejs git > /dev/null
-  npm install npm@latest -g > /dev/null
   export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
   echo '----------------------- Base Tools -------------------------'
   rustc -V 
   cargo -V
-  node -v
-  npm -v
   git --version
   echo '----------------------- Building Solana --------------------'
   cd /usr/local 

@@ -47,4 +47,6 @@ Summary:
 
 [Anchor Framework](https://github.com/project-serum/anchor)
 
+[Anchor Book](https://book.anchor-lang.com/)
+
 [Docker] (https://docker.com)

@@ -38,13 +38,14 @@ docker exec -i solanaX /bin/bash -s <<EOF
   cd /usr/local 
   git clone https://github.com/solana-labs/solana
   cd solana
-  awk '{ if (NR > 7 || NR < 14) print ""; else print $0}' ./scripts/cargo-install-all.sh > ./scripts/cargo-install-all-fix.sh
+  cat ./scripts/cargo-install-all.sh | awk '{ if (NR > 7 || NR < 14) print ""; else print $0}' > ./scripts/cargo-install-all-fix.sh
   sh ./scripts/cargo-install-all-fix.sh --validator-only .
   cargo build --release --bin solana-test-validator
-  cp target/release/solana-test-validator ./bin
-  ./bin/solana -V
-  ./bin/solana-keygen --version
-  ./bin/solana-test-validator --version
+  cp target/release/solana-test-validator /usr/local/bin
+  cp bin/sol*  /usr/local/bin
+  solana -V
+  solana-keygen --version
+  solana-test-validator --version
   echo '----------------------- Building Anchor --------------------'
   cargo install --git https://github.com/project-serum/anchor --tag v0.20.1 anchor-cli --locked
   anchor --version

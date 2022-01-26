@@ -21,7 +21,6 @@ case "$1" in
 echo "Building Solana Develop Enviroment"
 docker stop solanaX
 docker rm solanaX
-echo "Create Solana Container ToolSet .........."
 docker pull rust
 docker run  --name solanaX -v $(pwd):/usr/src -w /usr/src -id rust tail -f /dev/null
 echo "Container Conneting"
@@ -33,14 +32,14 @@ docker exec -i solanaX /bin/bash -s <<EOF
   apt-get install -y nodejs git > /dev/null
   npm install npm@latest -g > /dev/null
   export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
-  echo '----------------------- Base Toolset --------------------'
+  echo '----------------------- Base Tools -------------------------'
   rustc -V 
   cargo -V
   node -v
   npm -v
   git --version
   echo '----------------------- Building Solana --------------------'
-  cd /opt 
+  cd /usr/local 
   git clone https://github.com/solana-labs/solana
   cd solana
   sh ./scripts/cargo-install-all.sh --validator-only .

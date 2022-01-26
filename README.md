@@ -14,7 +14,7 @@ Command Line Tool to compile/deploy Smart Contract on Solana
 $ git clone https://github.com/glyfo/solana-quickstart
 $ cd solana-quickstart ; chmod +x glyctl.sh
 $ ./glyctl.sh
-Usage: ./glyctl.sh [setup|wallet|airdrop|compile|deploy|delete]
+Usage: ./glyctl.sh [setup|run|wallet|airdrop|compile|deploy|delete]
 ```
 
 Summary:

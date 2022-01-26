@@ -23,9 +23,8 @@ docker stop solanaX
 docker rm solanaX
 docker pull rust
 docker run  --name solanaX -v $(pwd):/usr/src -w /usr/src -id rust tail -f /dev/null
-echo "Container Conneting"
 docker exec -i solanaX /bin/bash -s <<EOF
-  echo '-----------------------Solana Tool------------------------'
+  echo '----------------------- Core Tool------------------------'
   uname -a
   curl -fsSL https://deb.nodesource.com/setup_16.x | bash - > /dev/null
   apt-get update && apt-get upgrade & apt-get install -y pkg-config build-essential libudev-dev --no-install-recommends apt-utils > /dev/null

@@ -18,10 +18,10 @@ fi
 
 case "$1" in
 'setup')
-echo "Building Solana Tools Enviroment"
+echo "Building Solana Develop Enviroment"
 docker stop solanaX
 docker rm solanaX
-echo "Create Solana Container Tools .........."
+echo "Create Solana Container ToolSet .........."
 docker pull rust
 docker run  --name solanaX -v $(pwd):/usr/src -w /usr/src -id rust tail -f /dev/null
 echo "Container Conneting"
@@ -31,7 +31,7 @@ docker exec -i solanaX /bin/bash -s <<EOF
   curl -fsSL https://deb.nodesource.com/setup_16.x | bash - > /dev/null
   apt-get update && apt-get upgrade & apt-get install -y pkg-config build-essential libudev-dev --no-install-recommends apt-utils > /dev/null
   apt-get install -y nodejs git > /dev/null
-  curl -sSfL https://release.solana.com/v1.8.13/install | bash - > /dev/null
+  curl -sSfL https://release.solana.com/v1.9.5/install | bash - > /dev/null
   cargo install --git https://github.com/project-serum/anchor --tag v0.20.1 anchor-cli --locked
   npm install npm@latest -g > /dev/null
   export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
@@ -51,9 +51,9 @@ EOF
 ;;
 'run')
 echo "Running Node-Test Validator.........."
-docker exec -id solanaX /bin/bash -s <<EOF
+docker exec -i solanaX /bin/bash -s <<EOF
    export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
-   solana-test-validator 
+   solana-test-validator & 
    exit
 EOF
 ;;

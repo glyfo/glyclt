@@ -37,7 +37,7 @@ docker exec -i solanaX /bin/bash -s <<EOF
   cd /usr/local 
   git clone https://github.com/solana-labs/solana
   cd solana
-  awk 'NR<7,NR>8' ./scripts/cargo-install-all.sh > /usr/src/cargo-install-all-fix.sh
+  sed '8d'./scripts/cargo-install-all.sh > /usr/src/cargo-install-all-fix.sh
   sh ./scripts/cargo-install-all-fix.sh --validator-only .
   cargo build --release --bin solana-test-validator
   cp target/release/solana-test-validator /usr/local/bin

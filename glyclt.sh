@@ -34,10 +34,10 @@ docker exec -i solanaX /bin/bash -s <<EOF
   git --version
   echo '----------------------- Building Solana --------------------'
   sleep 1
-# cd /usr/local 
-# git clone https://github.com/solana-labs/solana
-# cd solana
-awk 'NR>7' ./scripts/cargo-install-all.sh > ./scripts/cargo-install-all-fix.sh
+  cd /usr/local 
+  git clone https://github.com/solana-labs/solana
+  cd solana
+  awk 'NR>7' ./scripts/cargo-install-all.sh > ./scripts/cargo-install-all-fix.sh
   sh ./scripts/cargo-install-all-fix.sh --validator-only .
   cargo build --release --bin solana-test-validator
   cp target/release/solana-test-validator /usr/local/bin

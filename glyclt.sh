@@ -33,6 +33,7 @@ docker exec -i solanaX /bin/bash -s <<EOF
   cargo -V
   git --version
   echo '----------------------- Building Solana --------------------'
+  sleep 1
   cd /usr/local 
   git clone https://github.com/solana-labs/solana
   cd solana

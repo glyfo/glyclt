@@ -4,6 +4,7 @@
 # other workspace crates or native program crates.
 here="$(dirname "$0")"
 readlink_cmd="readlink"
+cargo=cargo
 
 set -e
 

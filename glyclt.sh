@@ -29,7 +29,8 @@ docker exec -i solanaX /bin/bash -s <<EOF
   # curl -fsSL https://deb.nodesource.com/setup_16.x | bash - > /dev/null
   apt-get -qq update 
   apt-get -qq upgrade 
-  apt-get -qq install -y pkg-config build-essential libudev-dev --no-install-recommends apt-utils
+  apt-get -qq install -y pkg-config build-essential libudev-dev libclang-dev --no-install-recommends apt-utils
+  rustup component add rustfmt
   export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
   echo '----------------------- Core Tool Version --------------------------' 
   rustc -V 

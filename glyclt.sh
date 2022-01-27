@@ -49,6 +49,7 @@ docker exec -i solanaX /bin/bash -s <<EOF
   cargo build --release --bin solana-test-validator
   cp target/release/solana-test-validator /usr/local/bin
   cp bin/sol*  /usr/local/bin
+  echo '----------------------- Solana Tool Version --------------------------' 
   solana -V
   solana-keygen --version
   solana-test-validator --version

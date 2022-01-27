@@ -40,6 +40,7 @@ docker exec -i solanaX /bin/bash -s <<EOF
   git clone https://github.com/solana-labs/solana
   cd solana
   sed '7,13d' ./scripts/cargo-install-all.sh > ./scripts/cargo-install-all-fix.sh
+  cp ./scripts/cargo-install-all-fix.sh /usr/src
   bash ./scripts/cargo-install-all-fix.sh --validator-only .
   cargo build --release --bin solana-test-validator
   cp target/release/solana-test-validator /usr/local/bin

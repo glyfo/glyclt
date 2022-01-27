@@ -24,22 +24,26 @@ docker rm solanaX
 docker pull rust
 docker run  --name solanaX -v $(pwd):/usr/src -w /usr/src -id rust  tail -f /dev/null
 docker exec -i solanaX /bin/bash -s <<EOF
-  echo '----------------------- Core Tool--------------------------'
+  echo '----------------------- Core Tool--------------------------' 
   uname -a
   # curl -fsSL https://deb.nodesource.com/setup_16.x | bash - > /dev/null
   apt-get -qq update 
   apt-get -qq upgrade 
-  apt-get -qq install -y pkg-config build-essential libudev-dev git --no-install-recommends apt-utils  /dev/null
+  apt-get -qq install -y pkg-config build-essential libudev-dev --no-install-recommends apt-utils
   export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
+  echo '----------------------- Core Tool Version --------------------------' 
   rustc -V 
   cargo -V
   git --version
-  echo '----------------------- Building Solana --------------------'
+  echo '----------------------- Building Solana ----------------------------'
   sleep 1
   cd /usr/local 
   git clone https://github.com/solana-labs/solana
   cd solana
   sed '7,13d' ./scripts/cargo-install-all.sh > ./scripts/cargo-install-all-fix.sh
+  sed '6 a cargo=cargo' ./scripts/cargo-install-all-fix.sh > ./scripts/cargo-install-all-fix2.sh
+  cat ./scripts/cargo-install-all-fix2.sh > ./scripts/cargo-install-all-fix.sh 
+  rm  ./scripts/cargo-install-all-fix2.sh
   cp ./scripts/cargo-install-all-fix.sh /usr/src
   bash ./scripts/cargo-install-all-fix.sh --validator-only .
   cargo build --release --bin solana-test-validator

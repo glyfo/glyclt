@@ -48,6 +48,7 @@ docker exec -i solanaX /bin/bash -s <<EOF
   cp ./scripts/cargo-install-all-fix.sh /usr/src
   bash ./scripts/cargo-install-all-fix.sh --validator-only .
   cargo build --release --bin solana-test-validator
+  cp /usr/local/solana/target/release/solana-test-validator /usr/local/solana/bin/
   export PATH="/usr/local/solana/bin:/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
   echo '----------------------- Solana Tool Version --------------------------' 
   solana -V
@@ -62,8 +63,8 @@ EOF
 'run')
 echo "Running Node-Test Validator.........."
 docker exec -i solanaX /bin/bash -s <<EOF
-   export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
-   solana-test-validator & 
+   export PATH="/usr/local/solana/bin:/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
+    /usr/local/solana/target/release/solana-test-validator --version
    exit
 EOF
 ;;

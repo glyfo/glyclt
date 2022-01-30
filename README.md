@@ -20,17 +20,18 @@ Usage: ./glyclt.sh [setup|run|wallet|airdrop|compile|deploy|delete]
 Summary:
 
 ```console
-+ setup   : Building Docker Imagen with Solana ToolSet 
-+ run     : Running Solana Node into Docker Container
-+ wallet  : Create a wallet to deploy smart contract on solana
-+ airdrop : Sol airdrop to wallet 
++ setup   : Building Docker Imagen with Solana ToolSet include 
++ run     : Running Solana Test Node into Docker Container
++ wallet  : Building wallet to deploy smart contract on solana
++ airdrop : airdrop SOl  to wallet 
 + compile : compile smart contract 
 + deploy  : deploy smart contract on solana
++ test    : validate smart contract function
 ```
 ## Solana Fundamentals
 
 + All is a Account 
-+ All Smart Program are Stateless 
++ Smart Program are Stateless 
 + Data & Program are separete 
 + System Program support Account creation
 + Token Program support Token creation. ( Funglble & No-Fungible support )
@@ -41,10 +42,10 @@ Summary:
 
 ## Reference
 
-[Solana Docs](https://docs.solana.com/)
+[Solana Docs] (https://docs.solana.com/)
 
-[Anchor Framework](https://github.com/project-serum/anchor)
+[Anchor Framework] (https://github.com/project-serum/anchor)
 
-[Anchor Book](https://book.anchor-lang.com/)
+[Anchor Book] (https://book.anchor-lang.com/)
 
 [Docker] (https://docker.com)

@@ -54,9 +54,10 @@ docker exec -i solanaX /bin/bash -s <<EOF
   solana -V
   solana-keygen --version
   solana-test-validator --version
-  #echo '----------------------- Building Anchor --------------------'
-  #cargo install --git https://github.com/project-serum/anchor --tag v0.20.1 anchor-cli --locked
-  #anchor --version
+  echo '----------------------- Building Anchor --------------------'
+  cargo install --git https://github.com/project-serum/anchor --tag v0.20.1 anchor-cli --locked
+  echo '----------------------- Anchor Version ---------------------'
+  anchor --version
   exit
 EOF
 ;;

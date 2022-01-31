@@ -61,7 +61,7 @@ docker exec -i solanaX /bin/bash -s <<EOF
   export PATH="/usr/local/solana/bin:/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
   cd /usr/local 
   echo '----------------------- Building Anchor --------------------'
-  cargo install --git https://github.com/project-serum/anchor --tag v0.20.1 anchor-cli --locked
+  cargo install --git https://github.com/project-serum/anchor --tag v0.20.1 anchor-cli 
   echo '----------------------- Anchor Version ---------------------'
   anchor --version
   exit
@@ -71,7 +71,7 @@ EOF
 docker exec -i solanaX /bin/bash -s <<EOF
    export PATH="/usr/local/solana/bin:/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
    echo "Running Node-Test Validator.........."
-   /usr/local/solana/target/release/solana-test-validator --version
+   solana-test-validator &
    exit
 EOF
 ;;

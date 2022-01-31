@@ -17,7 +17,7 @@ then
 fi
 
 case "$1" in
-'setup')
+'solana')
 echo "Building Command Line Tool Enviroment"
 docker stop solanaX
 docker rm solanaX
@@ -54,6 +54,14 @@ docker exec -i solanaX /bin/bash -s <<EOF
   solana -V
   solana-keygen --version
   solana-test-validator --version
+  exit
+EOF
+;;
+'anchor')
+echo "Running Node-Test Validator.........."
+docker exec -i solanaX /bin/bash -s <<EOF
+  export PATH="/usr/local/solana/bin:/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
+  cd /usr/local 
   echo '----------------------- Building Anchor --------------------'
   cargo install --git https://github.com/project-serum/anchor --tag v0.20.1 anchor-cli --locked
   echo '----------------------- Anchor Version ---------------------'
@@ -133,6 +141,6 @@ docker stop solanaX
 docker rm solanaX
 ;;
 'help')
-echo "Usage: $0 [setup|run|wallet|airdrop|build|deploy|delete]"
+echo "Usage: $0 [solana|anchor|run|wallet|airdrop|build|deploy|delete]"
 ;; 
 esac

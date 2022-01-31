@@ -69,7 +69,7 @@ EOF
 'run')
 docker exec -i solanaX /bin/bash -s <<EOF
    export PATH="/usr/local/solana/bin:/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
-   echo "Running Node-Test Validator.........."
+   echo "Running Solana  Test Validator.........."
    solana-test-validator &
    exit
 EOF

@@ -18,7 +18,6 @@ fi
 
 case "$1" in
 'solana')
-echo "Building Command Line Tool Enviroment"
 docker stop solanaX
 docker rm solanaX
 docker pull rust
@@ -58,7 +57,6 @@ docker exec -i solanaX /bin/bash -s <<EOF
 EOF
 ;;
 'anchor')
-echo "Running Node-Test Validator.........."
 docker exec -i solanaX /bin/bash -s <<EOF
   export PATH="/usr/local/solana/bin:/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
   cd /usr/local 
@@ -70,10 +68,10 @@ docker exec -i solanaX /bin/bash -s <<EOF
 EOF
 ;;
 'run')
-echo "Running Node-Test Validator.........."
 docker exec -i solanaX /bin/bash -s <<EOF
    export PATH="/usr/local/solana/bin:/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
-    /usr/local/solana/target/release/solana-test-validator --version
+   echo "Running Node-Test Validator.........."
+   /usr/local/solana/target/release/solana-test-validator --version
    exit
 EOF
 ;;
@@ -128,7 +126,6 @@ docker exec -i solanaX /bin/bash -s <<EOF
 EOF
 ;;
 'info')
-echo "Connecting Solana .........."
 docker exec -i solanaX /bin/bash -s <<EOF
    export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
    solana program show  -k walletid.json $2  --url https://api.devnet.solana.com

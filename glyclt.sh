@@ -44,7 +44,6 @@ docker exec -i solanaX /bin/bash -s <<EOF
   sed '6 a cargo=cargo' ./scripts/cargo-install-all-fix.sh > ./scripts/cargo-install-all-fix2.sh
   cat ./scripts/cargo-install-all-fix2.sh > ./scripts/cargo-install-all-fix.sh 
   rm  ./scripts/cargo-install-all-fix2.sh
-  cp ./scripts/cargo-install-all-fix.sh /usr/src
   bash ./scripts/cargo-install-all-fix.sh --validator-only .
   cargo build --release --bin solana-test-validator
   cp /usr/local/solana/target/release/solana-test-validator /usr/local/solana/bin/

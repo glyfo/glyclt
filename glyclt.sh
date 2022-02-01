@@ -101,7 +101,7 @@ EOF
 'airdrop')
 echo "Airdrop Wallet .........."
 docker exec -i solanaX /bin/bash -s <<EOF
-   export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
+   export PATH=$_path 
    export pubkey=$(solana-keygen pubkey walletid.json )
    echo '----------------------------------------------------------'
    echo "Public Key:"

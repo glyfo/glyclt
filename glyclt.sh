@@ -145,8 +145,8 @@ EOF
 docker exec -it solanaX /bin/bash 
 ;;
 'reset')
-docker stop  $(docker ps -q --filter ancestor=solanaX )
-docker start $(docker ps -q --filter ancestor=solanaX )
+docker stop  $(docker ps -a |grep solanaX |awk '{ print $1 }' )
+docker start $(docker ps -a |grep solanaX |awk '{ print $1 }' )
 ;;
 'delete')
 echo "Delete Docker Enviroment"

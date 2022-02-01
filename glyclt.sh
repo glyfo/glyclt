@@ -10,6 +10,13 @@
 
 # ---------------------- README ---------------------------------
 #
+#   export PATH=$_path - variable _path is a global var 
+#   echo $PWD          -  this is a bash session  
+#   echo \$PWD         -  this is a container session 
+
+## Global 
+_path="/usr/local/solana/bin:/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
+
 if [ "$1" = "" ]
 then
   ./glyclt.sh help
@@ -30,7 +37,7 @@ docker exec -i solanaX /bin/bash -s <<EOF
   apt-get -qq upgrade 
   apt-get -qq install -y pkg-config build-essential libudev-dev libclang-dev --no-install-recommends apt-utils
   rustup component add rustfmt
-  export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
+  export PATH=$_path
   echo '----------------------- Core Tool Version --------------------------' 
   rustc -V 
   cargo -V
@@ -57,7 +64,7 @@ EOF
 ;;
 'anchor')
 docker exec -i solanaX /bin/bash -s <<EOF
-  export PATH="/usr/local/solana/bin:/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
+  export PATH=$_path
   cd /usr/local 
   echo '----------------------- Building Anchor --------------------'
   cargo install --git https://github.com/project-serum/anchor --tag v0.20.1 anchor-cli 
@@ -67,17 +74,17 @@ docker exec -i solanaX /bin/bash -s <<EOF
 EOF
 ;;
 'run')
-docker exec -i solanaX /bin/bash -s <<EOF
-   export PATH="/usr/local/solana/bin:/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
-   echo "Running Solana  Test Validator.........."
-   solana-test-validator &
+docker exec -i solanaX /bin/bash -s <<EOF 
+   export PATH=$_path
+   #echo "Running Solana  Test Validator.........."
+   #solana-test-validator &
    exit
 EOF
 ;;
 'wallet')
 echo "Create Wallet .........."
 docker exec -i solanaX /bin/bash -s <<EOF
-   export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
+   export PATH=$_path
    echo "Wallet creation .........."
    solana config set --url http://localhost:8899
    solana-keygen new -f -s --no-bip39-passphrase --outfile walletid.json 

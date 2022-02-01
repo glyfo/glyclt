@@ -146,7 +146,9 @@ docker exec -it solanaX /bin/bash
 ;;
 'reset')
 docker stop  $(docker ps -a |grep solanaX |awk '{ print $1 }' )
+echo "Stop Docker Container"
 docker start $(docker ps -a |grep solanaX |awk '{ print $1 }' )
+echo "Start Docker Container"
 ;;
 'delete')
 echo "Delete Docker Enviroment"

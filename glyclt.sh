@@ -77,7 +77,9 @@ EOF
 docker exec -i solanaX /bin/bash -s <<EOF 
    export PATH=$_path
    echo "Running Solana  Test Validator.........."
-   nohup bash solana-test-validator  > solana-test-validator.log &
+   solana-test-validator --version
+   nohup solana-test-validator > solana-test-validator.log &
+   sleep 5
    netstat -an 
    exit
 EOF
@@ -138,6 +140,13 @@ docker exec -i solanaX /bin/bash -s <<EOF
    solana program show  -k walletid.json $2  --url https://api.devnet.solana.com
    exit
 EOF
+;;
+'login')
+docker exec -it solanaX /bin/bash 
+;;
+'reset')
+docker stop -i solanaX
+docker start -i solanaX
 ;;
 'delete')
 echo "Delete Docker Enviroment"

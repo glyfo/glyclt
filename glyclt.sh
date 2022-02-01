@@ -35,7 +35,7 @@ docker exec -i solanaX /bin/bash -s <<EOF
   # curl -fsSL https://deb.nodesource.com/setup_16.x | bash - > /dev/null
   apt-get -qq update 
   apt-get -qq upgrade 
-  apt-get -qq install -y pkg-config build-essential libudev-dev libclang-dev --no-install-recommends apt-utils
+  apt-get -qq install -y pkg-config build-essential libudev-dev libclang-dev net-tools --no-install-recommends apt-utils
   rustup component add rustfmt
   export PATH=$_path
   echo '----------------------- Core Tool Version --------------------------' 
@@ -76,8 +76,9 @@ EOF
 'run')
 docker exec -i solanaX /bin/bash -s <<EOF 
    export PATH=$_path
-   #echo "Running Solana  Test Validator.........."
-   #solana-test-validator &
+   echo "Running Solana  Test Validator.........."
+   nohup bash solana-test-validator  > solana-test-validator.log &
+   netstat -an 
    exit
 EOF
 ;;

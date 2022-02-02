@@ -78,10 +78,7 @@ docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    echo "Running Solana  Test Validator.........."
    cd /usr/local/solana
-   solana-test-validator --version
-   rm -rf test-ledger
-   nohup solana-test-validator 
-   sleep 2 
+   nohup solana-test-validator > /dev/null 2>&1 &
    exit
 EOF
 ;;

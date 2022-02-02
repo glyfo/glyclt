@@ -79,7 +79,8 @@ docker exec -i solanaX /bin/bash -s <<EOF
    echo "Running Solana  Test Validator.........."
    cd /usr/local/solana
    solana-test-validator --version
-   nohup solana-test-validator  &
+   rm -rf test-ledger
+   nohup solana-test-validator 
    sleep 5
    netstat -an 
    exit
@@ -88,8 +89,8 @@ EOF
 'log')
 docker exec -i solanaX /bin/bash -s <<EOF 
    export PATH=$_path
-   echo "Running Solana  Test Validator.........."
-   tail -20 /usr/local/solana/test-ledger/validator.log
+   netstat -an | grep LISTEN
+   #tail -30 /usr/local/solana/test-ledger/validator.log
    exit
 EOF
 ;;
@@ -126,7 +127,7 @@ EOF
 'build')
 echo "Building Smart Contract .........."
 docker exec -i solanaX /bin/bash -s <<EOF
-   export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
+   export PATH=$_path
    export RUST_BACKTRACE=full
    cd counter
    cargo build-bpf 
@@ -137,7 +138,7 @@ EOF
 'deploy')
 echo "Deploy  .........."
 docker exec -i solanaX /bin/bash -s <<EOF
-   export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
+   export PATH=$_path
    cd counter
    solana program deploy -k ../walletid.json  target/deploy/counter.so --url https://api.devnet.solana.com 
    exit
@@ -145,8 +146,8 @@ EOF
 ;;
 'info')
 docker exec -i solanaX /bin/bash -s <<EOF
-   export PATH="/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
-   solana program show  -k walletid.json $2  --url https://api.devnet.solana.com
+   export PATH=$_path
+   solana program show --buffers --all --keypair walletid.json  --url http://localhost:8899
    exit
 EOF
 ;;

@@ -77,10 +77,19 @@ EOF
 docker exec -i solanaX /bin/bash -s <<EOF 
    export PATH=$_path
    echo "Running Solana  Test Validator.........."
+   cd /usr/local/solana
    solana-test-validator --version
    nohup solana-test-validator  &
    sleep 5
    netstat -an 
+   exit
+EOF
+;;
+'log')
+docker exec -i solanaX /bin/bash -s <<EOF 
+   export PATH=$_path
+   echo "Running Solana  Test Validator.........."
+   tail -20 /usr/local/solana/test-ledger/validator.log
    exit
 EOF
 ;;

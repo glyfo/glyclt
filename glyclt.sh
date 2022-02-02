@@ -40,8 +40,10 @@ then
    case "$2" in 
    'init')
    call2cmd "anchor init hello"
+   ;;
    'build')
    call2cmd "anchor build "
+   ;;
    esac
 fi
 

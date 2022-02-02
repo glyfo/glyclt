@@ -17,10 +17,32 @@
 ## Global 
 _path="/usr/local/solana/bin:/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
 
+
+## function 
+
+call2cmd () {
+   docker exec -i solanaX /bin/bash -s <<EOF 
+   export PATH=$_path
+   $1
+   exit
+EOF
+  
+}
+
 if [ "$1" = "" ]
 then
   ./glyclt.sh help
   exit
+fi
+
+if [ "$1" = "anchor" ]
+then
+   case "$2" in 
+   'init')
+   call2cmd "anchor init hello"
+   'build')
+   call2cmd "anchor build "
+   esac
 fi
 
 case "$1" in

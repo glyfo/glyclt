@@ -91,9 +91,11 @@ docker exec -i solanaX /bin/bash -s <<EOF
   export PATH=$_path
   cd /usr/local 
   echo '----------------------- Building Anchor --------------------'
-  cargo install --git https://github.com/project-serum/anchor --tag v0.20.1 anchor-cli 
-  echo '----------------------- Anchor Version ---------------------'
-  anchor --version
+  cargo install --git https://github.com/project-serum/anchor --tag v0.20.1 --force anchor-cli 
+  echo '----------------------- Build Node&NPM ---------------------'
+  apt-get -qq install  -y nodejs > /dev/null
+  node --version
+  
   exit
 EOF
 ;;

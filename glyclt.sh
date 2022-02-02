@@ -81,8 +81,7 @@ docker exec -i solanaX /bin/bash -s <<EOF
    solana-test-validator --version
    rm -rf test-ledger
    nohup solana-test-validator 
-   sleep 5
-   netstat -an 
+   sleep 2 
    exit
 EOF
 ;;

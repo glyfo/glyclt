@@ -191,6 +191,6 @@ docker stop solanaX
 docker rm solanaX
 ;;
 'help')
-echo "Usage: $0 [solana|anchor|run|wallet|airdrop|build|deploy|delete]"
+echo "Usage: glyclt [solana|anchor|run|wallet|airdrop|build|deploy|delete]"
 ;; 
 esac

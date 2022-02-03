@@ -31,11 +31,29 @@ EOF
   
 }
 
-if [ "$1" = "" ]
-then
-  glyclt help
-  exit
-fi
+help () {
+   echo "${n} Usage: ${b} glyclt ${n}
+
+${b}+ setup${n}         : Handler Container to Compile & Install Software 
+     + solana   : Compile & Install Solana Tools & Node into Container
+     + anchor   : Compile & Install Anchor into Container
+     + dev      : Install Node,NPM and Yarn into the Container
+     + login    : Access to Container 
+     + reset    : Restart Container ( Stop & Start ) 
+     + delete   : Delete Container
+${b}+ run${n}           : Running Solana Test Node inside Container 
+${b}+ wallet${n}        : Handler Wallet 
+     + create   : Create Wallet and Save Wallet into the Container
+     + airdrop  : Add SOL to Wallet
+     + balance  : Review Balance
+${b}+ anchor${n}        : Solana FrameWork 
+     + init     : Create Project Folder 
+     + build    : Compile Program
+     + deploy   : Deploy Program on Solana Test Node
+     + test     : Running Test 
+${n} "
+ 
+}
 
 
 ## ----------------------  BEGIN SETUP --------------------------
@@ -96,8 +114,12 @@ EOF
    exit
 EOF
 ;;
-   '*') 
-echo "${n} Usage: ${b} glyclt setup ${n}
+   'login')
+    docker exec -it solanaX /bin/bash 
+    exit   
+    ;;
+   *) 
+   echo "${n} Usage: ${b} glyclt setup ${n}
 
   + solana   : Compile & Install Solana Tools & Node into Container
   + anchor   : Compile & Install Anchor into Container
@@ -106,6 +128,7 @@ echo "${n} Usage: ${b} glyclt setup ${n}
   + reset    : Restart Container ( Stop & Start ) 
   + delete   : Delete Container
   "
+  exit
 ;; 
 esac
 fi
@@ -139,9 +162,6 @@ EOF
    solana program deploy -k /usr/local/solana/walletid.json  target/deploy/counter.so --url https://api.devnet.solana.com 
    exit
 EOF
-;;
-   'login')
-    docker exec -it solanaX /bin/bash 
 ;;
     'reset')
     echo "Stop Container"
@@ -242,26 +262,9 @@ docker exec -i solanaX /bin/bash -s <<EOF
 EOF
 ;;
 'help')
-echo "${n} Usage: ${b} glyclt ${n}
-
-${b}+ setup${n}         : Handler Container to Compile & Install Software 
-     + solana   : Compile & Install Solana Tools & Node into Container
-     + anchor   : Compile & Install Anchor into Container
-     + dev      : Install Node,NPM and Yarn into the Container
-     + login    : Access to Container 
-     + reset    : Restart Container ( Stop & Start ) 
-     + delete   : Delete Container
-${b}+ run${n}           : Running Solana Test Node inside Container 
-${b}+ wallet${n}        : Handler Wallet 
-     + create   : Create Wallet and Save Wallet into the Container
-     + airdrop  : Add SOL to Wallet
-     + balance  : Review Balance
-${b}+ anchor${n}        : Solana FrameWork 
-     + init     : Create Project Folder 
-     + build    : Compile Program
-     + deploy   : Deploy Program on Solana Test Node
-     + test     : Running Test 
-${n} "
- 
+help 
 ;; 
+*)
+help 
+;;
 esac

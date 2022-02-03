@@ -126,12 +126,12 @@ docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    echo "Wallet creation .........."
    solana config set --url http://localhost:8899
-   solana-keygen new -f -s --no-bip39-passphrase --outfile walletid.json 
+   solana-keygen new -f -s --no-bip39-passphrase --outfile /usr/local/solana/walletid.json  
    echo '-----------------------Public Key ------------------------'
-   solana-keygen pubkey walletid.json 
+   solana-keygen pubkey /usr/local/solana/walletid.json 
    echo '----------------------------------------------------------'
    echo '-----------------------Private Key -----------------------'
-   cat walletid.json 
+   cat /usr/local/solana/walletid.json  
    echo ''
    echo '----------------------------------------------------------'
    exit
@@ -141,10 +141,10 @@ EOF
 echo "Airdrop Wallet .........."
 docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path 
-   export pubkey=$(solana-keygen pubkey walletid.json )
+   export pubkey=$(solana-keygen pubkey /usr/local/solana/walletid.json  )
    echo '----------------------------------------------------------'
    echo "Public Key:"
-   printf '%s\n' "$(solana-keygen pubkey walletid.json )" 
+   printf '%s\n' "$(solana-keygen pubkey /usr/local/solana/walletid.json  )" 
    echo '----------------------------------------------------------'
    solana airdrop 5 $pubkey  walletid.json  --url http://localhost:8899
    exit
@@ -166,14 +166,14 @@ echo "Deploy  .........."
 docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    cd counter
-   solana program deploy -k ../walletid.json  target/deploy/counter.so --url https://api.devnet.solana.com 
+   solana program deploy -k /usr/local/solana/walletid.json  target/deploy/counter.so --url https://api.devnet.solana.com 
    exit
 EOF
 ;;
 'info')
 docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
-   solana program show --buffers --all --keypair walletid.json  --url http://localhost:8899
+   solana program show --buffers --all --keypair /usr/local/solana/walletid.json   --url http://localhost:8899
    exit
 EOF
 ;;

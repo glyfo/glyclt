@@ -31,7 +31,7 @@ EOF
 
 if [ "$1" = "" ]
 then
-  ./glyclt.sh help
+  glyclt help
   exit
 fi
 

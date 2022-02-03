@@ -17,6 +17,8 @@
 ## Global 
 _path="/usr/local/solana/bin:/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
 
+b=$(tput bold)
+n=$(tput sgr0)
 
 ## function 
 
@@ -35,6 +37,72 @@ then
   exit
 fi
 
+
+## ----------------------  BEGIN SETUP --------------------------
+if [ "$1" = "setup" ]
+then
+   case "$2" in 
+   'solana')
+   docker stop solanaX
+   docker rm solanaX
+   docker pull rust
+   docker run  --name solanaX -v $(pwd):/usr/src -w /usr/src -id rust  tail -f /dev/null
+   docker exec -i solanaX /bin/bash -s <<EOF
+          echo '----------------------- Core Tool--------------------------' 
+          uname -a
+          apt-get -qq update 
+          apt-get -qq upgrade 
+          apt-get -qq install -y pkg-config build-essential libudev-dev libclang-dev net-tools --no-install-recommends apt-utils
+          rustup component add rustfmt
+          export PATH=$_path
+          echo '----------------------- Core Tool Version --------------------------' 
+          rustc -V 
+          cargo -V
+          git --version
+          echo '----------------------- Building Solana ----------------------------'
+          sleep 1
+          cd /usr/local 
+          git clone https://github.com/solana-labs/solana --tag v1.9.5
+          cd solana
+          sed '7,13d' ./scripts/cargo-install-all.sh > ./scripts/cargo-install-all-fix.sh
+          sed '6 a cargo=cargo' ./scripts/cargo-install-all-fix.sh > ./scripts/cargo-install-all-fix2.sh
+          cat ./scripts/cargo-install-all-fix2.sh > ./scripts/cargo-install-all-fix.sh 
+          rm  ./scripts/cargo-install-all-fix2.sh
+          bash ./scripts/cargo-install-all-fix.sh --validator-only .
+          cargo build --release --bin solana-test-validator
+          cp /usr/local/solana/target/release/solana-test-validator /usr/local/solana/bin/
+          export PATH="/usr/local/solana/bin:/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
+          echo '----------------------- Solana Tool Version --------------------------' 
+          solana -V
+          solana-keygen --version
+          solana-test-validator --version
+          exit
+EOF
+;;
+   'anchor')
+   docker exec -i solanaX /bin/bash -s <<EOF
+   export PATH=$_path
+   cd /usr/local 
+   echo '----------------------- Building Anchor --------------------'
+   cargo install --git https://github.com/project-serum/anchor --tag v0.20.1 --force anchor-cli 
+   exit
+EOF
+;;
+   'node')
+    docker exec -i solanaX /bin/bash -s <<EOF
+   export PATH=$_path
+   echo '----------------------- Installing NPM --------------------'
+   curl -fsSL https://deb.nodesource.com/setup_16.x | bash - > /dev/null
+   exit
+EOF
+;;
+esac
+fi
+
+## ----------------------  END SETUP ----------------------------
+
+## ----------------------  BEGIN ANCHOR -------------------------
+
 if [ "$1" = "anchor" ]
 then
    case "$2" in 
@@ -42,66 +110,102 @@ then
    call2cmd "anchor init hello"
    ;;
    'build')
-   call2cmd "anchor build "
-   ;;
-   esac
+   echo "Building Smart Contract .........."
+   docker exec -i solanaX /bin/bash -s <<EOF
+   export PATH=$_path
+   export RUST_BACKTRACE=full
+   cd counter
+   cargo build-bpf 
+   anchor idl parse -f src/lib.rs -o target/idl/rcp-mapping.json
+   exit
+EOF   
+;;
+   'deploy')
+   echo "Deploy  .........."
+   docker exec -i solanaX /bin/bash -s <<EOF
+   export PATH=$_path
+   cd counter
+   solana program deploy -k /usr/local/solana/walletid.json  target/deploy/counter.so --url https://api.devnet.solana.com 
+   exit
+EOF
+;;
+   'login')
+    docker exec -it solanaX /bin/bash 
+;;
+    'reset')
+    echo "Stop Container"
+    docker stop  $(docker ps -a |grep solanaX |awk '{ print $1 }' )
+    echo "Start Container"
+    docker start $(docker ps -a |grep solanaX |awk '{ print $1 }' )
+;;
+'delete')
+    echo "Delete Container Enviroment"
+    docker stop solanaX
+    docker rm solanaX
+;;
+esac
 fi
 
+## ----------------------  END ANCHOR -------------------------
+
+
+
+## ----------------------  BEGIN WALLET -------------------------
+
+if [ "$1" = "wallet" ]
+then
+   case "$2" in 
+   'create')
+   echo "Create Wallet .........."
+   docker exec -i solanaX /bin/bash -s <<EOF
+   export PATH=$_path
+   echo "Wallet creation .........."
+   solana config set --url http://localhost:8899
+   solana-keygen new -f -s --no-bip39-passphrase --outfile /usr/local/solana/walletid.json  
+   echo '-----------------------Public Key ------------------------'
+   solana-keygen pubkey /usr/local/solana/walletid.json 
+   echo '----------------------------------------------------------'
+   echo '-----------------------Private Key -----------------------'
+   cat /usr/local/solana/walletid.json  
+   echo ''
+   echo '----------------------------------------------------------'
+   exit
+EOF
+;;
+   'airdrop')
+   echo "Airdrop Wallet .........."
+   docker exec -i solanaX /bin/bash -s <<EOF
+   export PATH=$_path 
+   export pubkey=$(solana-keygen pubkey /usr/local/solana/walletid.json  )
+   echo '----------------------------------------------------------'
+   echo "Public Key:"
+   printf '%s\n' "$(solana-keygen pubkey /usr/local/solana/walletid.json  )" 
+   echo '----------------------------------------------------------'
+   solana airdrop 5 $pubkey  walletid.json  --url http://localhost:8899
+   exit
+EOF
+;;
+   'balance')
+   echo "Airdrop Wallet .........."
+   docker exec -i solanaX /bin/bash -s <<EOF
+   export PATH=$_path 
+   export pubkey=$(solana-keygen pubkey /usr/local/solana/walletid.json  )
+   echo '----------------------------------------------------------'
+   echo "Public Key:"
+   printf '%s\n' "$(solana-keygen pubkey /usr/local/solana/walletid.json  )" 
+   echo '----------------------------------------------------------'
+   solana airdrop 5 $pubkey  walletid.json  --url http://localhost:8899
+   exit
+EOF
+;;
+esac
+fi
+
+## ----------------------  END WALLET -------------------------
+
+## ----------------------  MAIN  ------------------------------
+
 case "$1" in
-'solana')
-docker stop solanaX
-docker rm solanaX
-docker pull rust
-docker run  --name solanaX -v $(pwd):/usr/src -w /usr/src -id rust  tail -f /dev/null
-docker exec -i solanaX /bin/bash -s <<EOF
-  echo '----------------------- Core Tool--------------------------' 
-  uname -a
-  apt-get -qq update 
-  apt-get -qq upgrade 
-  apt-get -qq install -y pkg-config build-essential libudev-dev libclang-dev net-tools --no-install-recommends apt-utils
-  rustup component add rustfmt
-  export PATH=$_path
-  echo '----------------------- Core Tool Version --------------------------' 
-  rustc -V 
-  cargo -V
-  git --version
-  echo '----------------------- Building Solana ----------------------------'
-  sleep 1
-  cd /usr/local 
-  git clone https://github.com/solana-labs/solana --tag v1.9.5
-  cd solana
-  sed '7,13d' ./scripts/cargo-install-all.sh > ./scripts/cargo-install-all-fix.sh
-  sed '6 a cargo=cargo' ./scripts/cargo-install-all-fix.sh > ./scripts/cargo-install-all-fix2.sh
-  cat ./scripts/cargo-install-all-fix2.sh > ./scripts/cargo-install-all-fix.sh 
-  rm  ./scripts/cargo-install-all-fix2.sh
-  bash ./scripts/cargo-install-all-fix.sh --validator-only .
-  cargo build --release --bin solana-test-validator
-  cp /usr/local/solana/target/release/solana-test-validator /usr/local/solana/bin/
-  export PATH="/usr/local/solana/bin:/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
-  echo '----------------------- Solana Tool Version --------------------------' 
-  solana -V
-  solana-keygen --version
-  solana-test-validator --version
-  exit
-EOF
-;;
-'anchor')
-docker exec -i solanaX /bin/bash -s <<EOF
-  export PATH=$_path
-  cd /usr/local 
-  echo '----------------------- Building Anchor --------------------'
-  cargo install --git https://github.com/project-serum/anchor --tag v0.20.1 --force anchor-cli 
-  exit
-EOF
-;;
-'node')
-docker exec -i solanaX /bin/bash -s <<EOF
-  export PATH=$_path
-  echo '----------------------- Installing NPM --------------------'
-  curl -fsSL https://deb.nodesource.com/setup_16.x | bash - > /dev/null
-  exit
-EOF
-;;
 'run')
 docker exec -i solanaX /bin/bash -s <<EOF 
    export PATH=$_path
@@ -119,56 +223,6 @@ docker exec -i solanaX /bin/bash -s <<EOF
    exit
 EOF
 ;;
-'wallet')
-echo "Create Wallet .........."
-docker exec -i solanaX /bin/bash -s <<EOF
-   export PATH=$_path
-   echo "Wallet creation .........."
-   solana config set --url http://localhost:8899
-   solana-keygen new -f -s --no-bip39-passphrase --outfile /usr/local/solana/walletid.json  
-   echo '-----------------------Public Key ------------------------'
-   solana-keygen pubkey /usr/local/solana/walletid.json 
-   echo '----------------------------------------------------------'
-   echo '-----------------------Private Key -----------------------'
-   cat /usr/local/solana/walletid.json  
-   echo ''
-   echo '----------------------------------------------------------'
-   exit
-EOF
-;;
-'airdrop')
-echo "Airdrop Wallet .........."
-docker exec -i solanaX /bin/bash -s <<EOF
-   export PATH=$_path 
-   export pubkey=$(solana-keygen pubkey /usr/local/solana/walletid.json  )
-   echo '----------------------------------------------------------'
-   echo "Public Key:"
-   printf '%s\n' "$(solana-keygen pubkey /usr/local/solana/walletid.json  )" 
-   echo '----------------------------------------------------------'
-   solana airdrop 5 $pubkey  walletid.json  --url http://localhost:8899
-   exit
-EOF
-;;
-'build')
-echo "Building Smart Contract .........."
-docker exec -i solanaX /bin/bash -s <<EOF
-   export PATH=$_path
-   export RUST_BACKTRACE=full
-   cd counter
-   cargo build-bpf 
-   anchor idl parse -f src/lib.rs -o target/idl/rcp-mapping.json
-   exit
-EOF
-;;
-'deploy')
-echo "Deploy  .........."
-docker exec -i solanaX /bin/bash -s <<EOF
-   export PATH=$_path
-   cd counter
-   solana program deploy -k /usr/local/solana/walletid.json  target/deploy/counter.so --url https://api.devnet.solana.com 
-   exit
-EOF
-;;
 'info')
 docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
@@ -176,39 +230,27 @@ docker exec -i solanaX /bin/bash -s <<EOF
    exit
 EOF
 ;;
-'login')
-docker exec -it solanaX /bin/bash 
-;;
-'reset')
-echo "Stop Docker Container"
-docker stop  $(docker ps -a |grep solanaX |awk '{ print $1 }' )
-echo "Start Docker Container"
-docker start $(docker ps -a |grep solanaX |awk '{ print $1 }' )
-;;
-'delete')
-echo "Delete Docker Enviroment"
-docker stop solanaX
-docker rm solanaX
-;;
 'help')
-echo "Usage: glyclt 
+echo "${n} Usage: ${b} glyclt ${n}
 
- + setup        : Handler Compile and Install 
+${b}+ setup${n}         : Handler Container to Compile & Install Software 
      + solana   : Compile & Install Solana Tools & Node into Container
      + anchor   : Compile & Install Anchor into Container
      + dev      : Install Node,NPM and Yarn into the Container
      + login    : Access to Container 
      + reset    : Restart Container ( Stop & Start ) 
- + run          : Running Solana Test Node inside Container 
- + wallet       : Handler Wallet 
+     + delete   : Delete Container
+${b}+ run${n}           : Running Solana Test Node inside Container 
+${b}+ wallet${n}        : Handler Wallet 
      + create   : Create Wallet and Save Wallet into the Container
-     + view     : View Wallet Detail 
- + airdrop      : Give Airdrop to Wallet 
- + anchor       : Solana FrameWork 
+     + airdrop  : Add SOL to Wallet
+     + balance  : Review Balance
+${b}+ anchor${n}        : Solana FrameWork 
      + init     : Create Project Folder 
      + build    : Compile Program
      + deploy   : Deploy Program on Solana Test Node
      + test     : Running Test 
- "
+${n} "
+ 
 ;; 
 esac

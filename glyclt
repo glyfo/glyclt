@@ -56,7 +56,6 @@ docker run  --name solanaX -v $(pwd):/usr/src -w /usr/src -id rust  tail -f /dev
 docker exec -i solanaX /bin/bash -s <<EOF
   echo '----------------------- Core Tool--------------------------' 
   uname -a
-  # curl -fsSL https://deb.nodesource.com/setup_16.x | bash - > /dev/null
   apt-get -qq update 
   apt-get -qq upgrade 
   apt-get -qq install -y pkg-config build-essential libudev-dev libclang-dev net-tools --no-install-recommends apt-utils
@@ -69,7 +68,7 @@ docker exec -i solanaX /bin/bash -s <<EOF
   echo '----------------------- Building Solana ----------------------------'
   sleep 1
   cd /usr/local 
-  git clone https://github.com/solana-labs/solana
+  git clone https://github.com/solana-labs/solana --tag v1.9.5
   cd solana
   sed '7,13d' ./scripts/cargo-install-all.sh > ./scripts/cargo-install-all-fix.sh
   sed '6 a cargo=cargo' ./scripts/cargo-install-all-fix.sh > ./scripts/cargo-install-all-fix2.sh
@@ -99,7 +98,7 @@ EOF
 docker exec -i solanaX /bin/bash -s <<EOF
   export PATH=$_path
   echo '----------------------- Installing NPM --------------------'
-  apt-get -qq install -y nodejs
+  curl -fsSL https://deb.nodesource.com/setup_16.x | bash - > /dev/null
   exit
 EOF
 ;;

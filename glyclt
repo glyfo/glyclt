@@ -98,11 +98,8 @@ EOF
 'node')
 docker exec -i solanaX /bin/bash -s <<EOF
   export PATH=$_path
-  cd /usr/local 
   echo '----------------------- Installing NPM --------------------'
-  apt-get -qq install -y nodejs npm
-  node -v 
-  npm  -v 
+  apt-get -qq install -y nodejs
   exit
 EOF
 ;;

@@ -96,6 +96,17 @@ EOF
    exit
 EOF
 ;;
+   '*') 
+echo "${n} Usage: ${b} glyclt setup ${n}
+
+  + solana   : Compile & Install Solana Tools & Node into Container
+  + anchor   : Compile & Install Anchor into Container
+  + dev      : Install Node,NPM and Yarn into the Container
+  + login    : Access to Container 
+  + reset    : Restart Container ( Stop & Start ) 
+  + delete   : Delete Container
+  "
+;; 
 esac
 fi
 

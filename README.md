@@ -13,7 +13,7 @@ Command Line Tool to simplify compile & deploy Smart Contract on Solana
 ```console
 $ git clone https://github.com/glyfo/glyclt-solana
 $ chmod +x glyclt-solana/glyclt
-$ export PATH=$PWD/glyclt;$PATH
+$ export PATH=$PWD/glyclt:$PATH
 Usage: ./glyclt.sh [setup|run|wallet|airdrop|compile|deploy|delete]
 ```
 

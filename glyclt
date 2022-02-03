@@ -192,20 +192,23 @@ docker rm solanaX
 ;;
 'help')
 echo "Usage: glyclt 
- + setup
-     + solana 
-     + anchor
-     + dev 
- + run 
- + wallet
- + airdrop 
- + anchor
-     + init 
-     + build
-     + deploy
-     + test  
- + delete
 
+ + setup      : Handler Compile and Install 
+     + solana : Compile & Install Solana Tools & Node into Container
+     + anchor : Compile & Install Anchor into Container
+     + dev    : Install Node,NPM and Yarn into the Container
+     + login  : Access to Container 
+     + reset  : Restart Container ( Stop & Start ) 
+ + run        : Running Solana Test Node inside Container 
+ + wallet     : Handler Wallet 
+     + create : Create Wallet and Save Wallet into the Container
+     + view   : View Wallet Detail 
+ + airdrop    : Give Airdrop to Wallet 
+ + anchor     : Solana FrameWork 
+     + init   : Create Project Folder 
+     + build  : Compile Program
+     + deploy : Deploy Program on Solana Test Node
+     + test   : Running Test 
  "
 ;; 
 esac

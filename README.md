@@ -11,9 +11,11 @@ Command Line Tool to simplify compile & deploy Smart Contract on Solana
 ## Install 
 
 ```console
+$ mkdir glyfolabs
+$ cd glyfolabs
 $ git clone https://github.com/glyfo/glyclt-solana
 $ chmod +x glyclt-solana/glyclt
-$ export PATH=$PWD/glyclt:$PATH
+$ export PATH=$PWD/glyclt-solana/glyclt:$PATH
 $ glyclt
 Usage: glyclt [setup|run|wallet|airdrop|compile|deploy|delete]
 ```
@@ -21,13 +23,26 @@ Usage: glyclt [setup|run|wallet|airdrop|compile|deploy|delete]
 Summary:
 
 ```console
-+ setup   : Building Docker Imagen with Solana ToolSet include 
-+ run     : Running Solana Test Node into Docker Container
-+ wallet  : Building wallet to deploy smart contract on solana
-+ airdrop : airdrop SOl  to wallet 
-+ compile : compile smart contract 
-+ deploy  : deploy smart contract on solana
-+ test    : validate smart contract function
+ Usage:  glyclt 
+
++ setup         : Handler Container to Compile & Install Software 
+     + solana   : Compile & Install Solana Tools & Node into Container
+     + anchor   : Compile & Install Anchor into Container
+     + dev      : Install Node,NPM and Yarn into the Container
+     + login    : Access to Container 
+     + reset    : Restart Container ( Stop & Start ) 
+     + delete   : Delete Container
++ run           : Running Solana Test Node inside Container 
++ wallet        : Handler Wallet 
+     + create   : Create Wallet and Save Wallet into the Container
+     + airdrop  : Add SOL to Wallet
+     + balance  : Review Balance
++ anchor        : Solana FrameWork 
+     + init     : Create Project Folder 
+     + build    : Compile Program
+     + deploy   : Deploy Program on Solana Test Node
+     + test     : Running Test 
+
 ```
 ## Solana Fundamentals
 

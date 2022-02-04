@@ -85,7 +85,7 @@ then
           echo '----------------------- Building Solana ----------------------------'
           sleep 1
           cd /usr/local 
-          git checkout -b $SOLANA_VERSION  https://github.com/solana-labs/solana solana
+          git -c advice.detachedHead=false clone -b $SOLANA_VERSION  https://github.com/solana-labs/solana
           cd solana
           sed '7,13d' ./scripts/cargo-install-all.sh > ./scripts/cargo-install-all-fix.sh
           sed '6 a cargo=cargo' ./scripts/cargo-install-all-fix.sh > ./scripts/cargo-install-all-fix2.sh

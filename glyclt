@@ -101,6 +101,7 @@ then
           solana-test-validator --version
           exit
 EOF
+   exit
 ;;
    'anchor')
    docker exec -i solanaX /bin/bash -s <<EOF
@@ -110,6 +111,7 @@ EOF
    cargo install --git https://github.com/project-serum/anchor --tag v0.20.1 --force anchor-cli 
    exit
 EOF
+   exit
 ;;
    'node')
     docker exec -i solanaX /bin/bash -s <<EOF
@@ -118,6 +120,7 @@ EOF
    curl -fsSL https://deb.nodesource.com/setup_16.x | bash - > /dev/null
    exit
 EOF
+   exit
 ;;
    'login')
     docker exec -it solanaX /bin/bash 
@@ -158,6 +161,7 @@ then
    anchor idl parse -f src/lib.rs -o target/idl/rcp-mapping.json
    exit
 EOF   
+   exit
 ;;
    'deploy')
    echo "Deploy  .........."
@@ -167,17 +171,20 @@ EOF
    solana program deploy -k /usr/local/solana/walletid.json  target/deploy/counter.so --url https://api.devnet.solana.com 
    exit
 EOF
+   exit
 ;;
-    'reset')
+   'reset')
     echo "Stop Container"
     docker stop  $(docker ps -a |grep solanaX |awk '{ print $1 }' )
     echo "Start Container"
     docker start $(docker ps -a |grep solanaX |awk '{ print $1 }' )
+    exit
 ;;
 'delete')
     echo "Delete Container Enviroment"
     docker stop solanaX
     docker rm solanaX
+    exit
 ;;
 esac
 fi

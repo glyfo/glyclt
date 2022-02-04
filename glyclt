@@ -8,19 +8,24 @@
 # support : hello@glyfo.com                                                         #
 #####################################################################################
 
-# ---------------------- README ---------------------------------
-#
+# ---------------------- TIPS -------------------------------
 #   export PATH=$_path - variable _path is a global var 
 #   echo $PWD          -  this is a bash session  
 #   echo \$PWD         -  this is a container session 
 
-## Global 
+
+SOLANA_VERSION=v1.9.5
+ANCHOR_VERSION=v0.20.1
+
+
+## ----------------------  GLOBAL --------------------------
 _path="/usr/local/solana/bin:/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
 
 b=$(tput bold)
 n=$(tput sgr0)
 
-## function 
+
+## ----------------------  UTIL FUNCTION ---------------------
 
 call2cmd () {
    docker exec -i solanaX /bin/bash -s <<EOF 
@@ -80,7 +85,7 @@ then
           echo '----------------------- Building Solana ----------------------------'
           sleep 1
           cd /usr/local 
-          git clone https://github.com/solana-labs/solana --tag v1.9.5
+          git clone https://github.com/solana-labs/solana --tag $SOLANA_VERSION --force solana
           cd solana
           sed '7,13d' ./scripts/cargo-install-all.sh > ./scripts/cargo-install-all-fix.sh
           sed '6 a cargo=cargo' ./scripts/cargo-install-all-fix.sh > ./scripts/cargo-install-all-fix2.sh

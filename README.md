@@ -17,7 +17,7 @@ $ git clone https://github.com/glyfo/glyclt-solana
 $ chmod +x glyclt-solana/glyclt
 $ export PATH=$PWD/glyclt-solana/:$PATH
 $ glyclt
-Usage: glyclt [setup|run|wallet|airdrop|compile|deploy|delete]
+Usage: glyclt
 
 + setup         : Handler Container to Compile & Install Software 
      + solana   : Compile & Install Solana Tools & Node into Container

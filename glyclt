@@ -113,11 +113,16 @@ EOF
 EOF
    exit
 ;;
-   'node')
+   'dev')
     docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    echo '----------------------- Installing NPM --------------------'
    curl -fsSL https://deb.nodesource.com/setup_16.x | bash - > /dev/null
+   apt-get -qq install -y nodejs
+   npm install --global yarn
+   node --version
+   npm  --version 
+   yarn --version
    exit
 EOF
    exit

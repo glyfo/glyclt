@@ -16,8 +16,8 @@
 
 SOLANA_VERSION=v1.9.5
 ANCHOR_VERSION=v0.20.1
-SOLANA_CHAIN="http://localhost:8899"
-WALLET_FILE="/usr/local/solana/walletid.json" 
+SOLANA_CHAIN=http://localhost:8899
+WALLET_FILE=/usr/local/solana/walletid.json
 
 
 ## ----------------------  GLOBAL --------------------------
@@ -246,12 +246,12 @@ exit
    echo "Airdrop Wallet .........."
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path 
-   export pubkey=$(solana-keygen pubkey $WALLET_FILE   )
+   export pubkey=$(solana-keygen pubkey $WALLET_FILE )
    echo '----------------------------------------------------------'
    echo "Public Key:"
    printf '%s\n' "$(solana-keygen pubkey $WALLET_FILE  )" 
    echo '----------------------------------------------------------'
-   solana airdrop 5 $pubkey  $WALLET_FILE   --url  $SOLANA_CHAIN
+   solana airdrop 5 $pubkey $WALLET_FILE  --url  $SOLANA_CHAIN
    exit
 EOF
 exit
@@ -265,7 +265,7 @@ exit
    echo "Public Key:"
    printf '%s\n' "$(solana-keygen pubkey $WALLET_FILE  )" 
    echo '----------------------------------------------------------'
-   solana balance pubkey  --url $SOLANA_CHAIN
+   solana balance $pubkey  --url $SOLANA_CHAIN
    exit
 EOF
 exit

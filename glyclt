@@ -39,7 +39,7 @@ EOF
 }
 
 version () {
-   echo "glyclt 0.0.1"
+   echo "glyclt 0.0.2"
 }
 
 help () {

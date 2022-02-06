@@ -38,6 +38,10 @@ EOF
   
 }
 
+version () {
+   echo "glyclt 0.0.1"
+}
+
 help () {
    echo "${n} Usage: ${b} glyclt ${n}
 
@@ -236,6 +240,7 @@ then
    echo '----------------------------------------------------------'
    exit
 EOF
+exit
 ;;
    'airdrop')
    echo "Airdrop Wallet .........."
@@ -249,6 +254,7 @@ EOF
    solana airdrop 5 $pubkey  walletid.json  --url http://localhost:8899
    exit
 EOF
+exit
 ;;
    'balance')
    echo "Airdrop Wallet .........."
@@ -262,6 +268,7 @@ EOF
    solana airdrop 5 $pubkey  walletid.json  --url http://localhost:8899
    exit
 EOF
+exit
 ;;
 esac
 fi
@@ -279,6 +286,7 @@ docker exec -i solanaX /bin/bash -s <<EOF
    nohup solana-test-validator > /dev/null 2>&1 &
    exit
 EOF
+exit
 ;;
 'log')
 docker exec -i solanaX /bin/bash -s <<EOF 
@@ -287,6 +295,7 @@ docker exec -i solanaX /bin/bash -s <<EOF
    #tail -30 /usr/local/solana/test-ledger/validator.log
    exit
 EOF
+exit
 ;;
 'info')
 docker exec -i solanaX /bin/bash -s <<EOF
@@ -294,9 +303,13 @@ docker exec -i solanaX /bin/bash -s <<EOF
    solana program show --buffers --all --keypair /usr/local/solana/walletid.json   --url http://localhost:8899
    exit
 EOF
+exit
 ;;
 'help')
 help 
+;; 
+'version')
+version 
 ;; 
 *)
 help 

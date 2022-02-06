@@ -247,13 +247,7 @@ exit
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    solana-keygen pubkey $WALLET_FILE
-   echo $_
-   echo $!
-   echo "Wallet File $(echo $pubkey )"
-   echo "Wallet File $(echo ${WALLET_FILE})"
-   echo "Public Key  $pubkey "
-   echo '----------------------------------------------------------'
-   solana airdrop 5 $pubkey $WALLET_FILE --url  $SOLANA_CHAIN
+   solana airdrop 5 $_ $WALLET_FILE --url  $SOLANA_CHAIN
    exit
 EOF
 exit

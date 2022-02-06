@@ -16,10 +16,12 @@
 
 SOLANA_VERSION=v1.9.5
 ANCHOR_VERSION=v0.20.1
+SOLANA_CHAIN=http://localhost:8899
+WALLET_FILE=/usr/local/solana/walletid.json 
 
 
 ## ----------------------  GLOBAL --------------------------
-_path="/usr/local/solana/bin:/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
+_path="/usr/local/solana/bin:/usr/local/cargo/bin:/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
 
 b=$(tput bold)
 n=$(tput sgr0)
@@ -108,7 +110,7 @@ EOF
    export PATH=$_path
    cd /usr/local 
    echo '----------------------- Building Anchor --------------------'
-   cargo install --git https://github.com/project-serum/anchor --tag v0.20.1 --force anchor-cli 
+   cargo install --git https://github.com/project-serum/anchor --tag $ANCHOR_VERSION anchor-cli  --locked
    exit
 EOF
    exit
@@ -130,7 +132,22 @@ EOF
    'login')
     docker exec -it solanaX /bin/bash 
     exit   
-    ;;
+;;
+   'release')
+    docker exec -i solanaX /bin/bash -s <<EOF
+   export PATH=$_path
+   echo '----------------------- Release  --------------------'
+   echo  "rustc          $(rustc -V |awk '{ print $2 }' )"
+   echo  "cargo          $(cargo -V |awk '{ print $2 }' )"
+   echo  "solana         $(solana -V |awk '{ print $2 }' )"
+   echo  "solana-keygen  $(solana-keygen -V |awk '{ print $2 }' )"
+   echo  "node           $(node --version |awk '{ print $1 }' )"  
+   echo  "npm            $(npm --version |awk '{ print $1 }' )"  
+   echo  "yarn           $(yarn --version |awk '{ print $1 }' )"  
+   exit
+EOF
+   exit
+;;
    *) 
    echo "${n} Usage: ${b} glyclt setup ${n}
 
@@ -208,13 +225,13 @@ then
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    echo "Wallet creation .........."
-   solana config set --url http://localhost:8899
-   solana-keygen new -f -s --no-bip39-passphrase --outfile /usr/local/solana/walletid.json  
+   solana config set --url $SOLANA_CHAIN
+   solana-keygen new -f -s --no-bip39-passphrase --outfile $WALLET_FILE  
    echo '-----------------------Public Key ------------------------'
-   solana-keygen pubkey /usr/local/solana/walletid.json 
+   solana-keygen pubkey $WALLET_FILE 
    echo '----------------------------------------------------------'
    echo '-----------------------Private Key -----------------------'
-   cat /usr/local/solana/walletid.json  
+   cat $WALLET_FILE   
    echo ''
    echo '----------------------------------------------------------'
    exit

@@ -16,8 +16,8 @@
 
 SOLANA_VERSION=v1.9.5
 ANCHOR_VERSION=v0.20.1
-SOLANA_CHAIN=http://localhost:8899
-WALLET_FILE=/usr/local/solana/walletid.json 
+SOLANA_CHAIN="http://localhost:8899"
+WALLET_FILE="/usr/local/solana/walletid.json" 
 
 
 ## ----------------------  GLOBAL --------------------------

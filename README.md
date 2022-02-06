@@ -7,15 +7,13 @@ Command Line Tool to simplify compile & deploy Smart Contract on Solana
 ## Prerequisite 
 
 + Docker 
++ wget
 
 ## Install 
 
 ```console
-$ mkdir glyfolabs
-$ cd glyfolabs
-$ git clone https://github.com/glyfo/glyclt-solana
-$ chmod +x glyclt-solana/glyclt
-$ export PATH=$PWD/glyclt-solana/:$PATH
+$ wget -O /usr/local/bin/glyclt https://raw.githubusercontent.com/glyfo/glyclt-solana/main/glyclt
+$ chmod +x /usr/local/bin/glyclt
 $ glyclt
 Usage: glyclt
 
@@ -36,6 +34,17 @@ Usage: glyclt
      + build    : Compile Program
      + deploy   : Deploy Program on Solana Test Node
      + test     : Running Test 
+
+```
+
+## Building Container 
+
+glyfclt handler communication with docker & container solanaX . glyfolabs folder is mount into the container.
+
+```console
+$ mkdir glyfolabs
+$ cd glyfolabs
+$ glyfclt setup solana 
 
 ```
 ## Solana Fundamentals

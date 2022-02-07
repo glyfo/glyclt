@@ -36,15 +36,15 @@ call2cmd () {
 EOF
 }
 
-__IsRun = """IsRun () {
+_IsRun = "IsRun () {
     if pgrep -x $2 >/dev/null
    then
-    echo '$1 is running'
+    echo 'OK'
    else
-    echo '$1 stopped' 
+    echo 'NOK' 
    fi
 }
-"""
+"
 
 version () {
    echo "glyclt 0.0.2"
@@ -304,7 +304,7 @@ exit
   'status')
    docker exec -i solanaX /bin/bash -s <<EOF 
    export PATH=$_path
-   export -f $__IsRun
+   export -f $_IsRun
    IsRun solana
    exit
 EOF

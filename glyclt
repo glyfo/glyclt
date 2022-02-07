@@ -10,8 +10,8 @@
 
 # ---------------------- TIPS -------------------------------
 #   export PATH=$_path - variable _path is a global var 
-#   echo $PWD          -  this is a bash session  
-#   echo \$PWD         -  this is a container session 
+#   echo $PWD          -  regular dollar char for outer (i.e. local) variables, e.g. 
+#   echo \$PWD         -  escaped dollar char for inner (i.e. remote) variables, e.g.
 
 
 SOLANA_VERSION=v1.9.5
@@ -36,14 +36,15 @@ call2cmd () {
 EOF
 }
 
-isPIDrun () {
+__IsRun = """IsRun () {
     if pgrep -x $2 >/dev/null
    then
-    echo "$1 is running"
+    echo '$1 is running'
    else
-    echo "$1 stopped" 
+    echo '$1 stopped' 
    fi
 }
+"""
 
 version () {
    echo "glyclt 0.0.2"
@@ -303,8 +304,8 @@ exit
   'status')
    docker exec -i solanaX /bin/bash -s <<EOF 
    export PATH=$_path
-   export -f isPIDrun
-   isPIDrun solana
+   export -f $__IsRun
+   IsRun solana
    exit
 EOF
 exit

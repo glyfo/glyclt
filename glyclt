@@ -37,12 +37,7 @@ EOF
 }
 
 _IsRun = "IsRun() {
-    if pgrep -x $2 >/dev/null
-   then
     echo 'OK'
-   else
-    echo 'NOK' 
-   fi
 }
 "
 

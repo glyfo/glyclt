@@ -308,6 +308,16 @@ exit
 EOF
 exit
 ;;
+  'reset')
+   docker exec -i solanaX /bin/bash -s <<EOF 
+   export PATH=$_path
+   echo "Running Solana  Test Validator.........."
+   rm -rf /usr/local/solana/test-ledger
+   killall $(ps -fea | grep solana)
+   exit
+EOF
+exit
+;;
    'log')
    docker exec -i solanaX /bin/bash -s <<EOF 
    export PATH=$_path

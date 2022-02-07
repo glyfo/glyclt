@@ -15,7 +15,7 @@ Command Line Tool to simplify compile & deploy Smart Contract on Solana
 $ wget -O /usr/local/bin/glyclt https://raw.githubusercontent.com/glyfo/glyclt-solana/main/glyclt
 $ chmod +x /usr/local/bin/glyclt
 $ glyclt
-Usage: glyclt
+  Usage: glyclt
 
 + setup         : Handler Container to Compile & Install Software 
      + solana   : Compile & Install Solana Tools & Node into Container
@@ -24,11 +24,17 @@ Usage: glyclt
      + login    : Access to Container 
      + reset    : Restart Container ( Stop & Start ) 
      + delete   : Delete Container
-+ run           : Running Solana Test Node inside Container 
++ locnet        : Handler Solana Local Chain
+     + run      : Run Solana Local Chain
+     + info     : Info of Solana Local Chain
+     + status   : Validate if Solana Local Chain is Running
+     + restart  : Stop & Start Solana Local Chain
+     + log      : View Solana Local Chain Logger
+     + reset    : Delete Data of Solana Local Chain 
 + wallet        : Handler Wallet 
-     + create   : Create Wallet and Save Wallet into the Container
-     + airdrop  : Add SOL to Wallet
-     + balance  : Review Balance
+     + create   : Create Main Wallet and Save into the Container
+     + airdrop  : Add SOL to Main Wallet
+     + balance  : Review Main Wallet Balance
 + anchor        : Solana FrameWork 
      + init     : Create Project Folder 
      + build    : Compile Program

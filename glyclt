@@ -36,7 +36,7 @@ call2cmd () {
 EOF
 }
 
-_IsRun = "IsRun () {
+_IsRun = "IsRun() {
     if pgrep -x $2 >/dev/null
    then
     echo 'OK'
@@ -304,7 +304,7 @@ exit
   'status')
    docker exec -i solanaX /bin/bash -s <<EOF 
    export PATH=$_path
-   export -f $_IsRun
+   export -xf $_IsRun
    IsRun solana
    exit
 EOF

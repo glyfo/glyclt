@@ -26,6 +26,9 @@ _path="/usr/local/solana/bin:/usr/local/cargo/bin:/bin:/usr/bin:/root/.local/sha
 b=$(tput bold)
 n=$(tput sgr0)
 
+
+_IsRun = "IsRun() { echo 'OK' }"
+
 ## ----------------------  UTIL FUNCTION ---------------------
 
 call2cmd () {
@@ -35,11 +38,6 @@ call2cmd () {
    exit
 EOF
 }
-
-_IsRun = "IsRun() {
-    echo 'OK'
-}
-"
 
 version () {
    echo "glyclt 0.0.2"
@@ -299,7 +297,7 @@ exit
   'status')
    docker exec -i solanaX /bin/bash -s <<EOF 
    export PATH=$_path
-   export -f $(echo ${_IsRun} )
+   eval $_IsRun
    IsRun solana
    exit
 EOF

@@ -299,7 +299,7 @@ exit
   'status')
    docker exec -i solanaX /bin/bash -s <<EOF 
    export PATH=$_path
-   export -f $(echo $_IsRun)
+   export -f $(echo ${_IsRun} )
    IsRun solana
    exit
 EOF

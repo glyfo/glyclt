@@ -303,7 +303,8 @@ exit
   'status')
    docker exec -i solanaX /bin/bash -s <<EOF 
    export PATH=$_path
-   \isPIDrun solana
+   export -f isPIDrun
+   isPIDrun solana
    exit
 EOF
 exit

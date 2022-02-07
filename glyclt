@@ -27,7 +27,7 @@ b=$(tput bold)
 n=$(tput sgr0)
 
 
-_IsRun = "IsRun() { echo 'OK' }"
+_IsRun = "IsRun () { echo 'OK' }"
 
 ## ----------------------  UTIL FUNCTION ---------------------
 
@@ -297,7 +297,7 @@ exit
   'status')
    docker exec -i solanaX /bin/bash -s <<EOF 
    export PATH=$_path
-   eval $( echo ${_IsRun})
+   eval "IsRun () { echo 'OK' }"
    IsRun solana
    exit
 EOF

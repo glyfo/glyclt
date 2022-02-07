@@ -26,7 +26,6 @@ _path="/usr/local/solana/bin:/usr/local/cargo/bin:/bin:/usr/bin:/root/.local/sha
 b=$(tput bold)
 n=$(tput sgr0)
 
-
 ## ----------------------  UTIL FUNCTION ---------------------
 
 call2cmd () {

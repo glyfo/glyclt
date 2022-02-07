@@ -52,7 +52,13 @@ ${b}+ setup${n}         : Handler Container to Compile & Install Software
      + login    : Access to Container 
      + reset    : Restart Container ( Stop & Start ) 
      + delete   : Delete Container
-${b}+ run${n}           : Running Solana Test Node inside Container 
+${b}+ locnet${n}        : Handler Solana Local Chain
+     + run      : Run Solana Local Chain
+     + info     : Info of Solana Local Chain
+     + status   : Validate if Solana Local Chain is Running
+     + restart  : Stop & Start Solana Local Chain
+     + log      : View Solana Local Chain Logger
+     + reset    : Delete Data of Solana Local Chain 
 ${b}+ wallet${n}        : Handler Wallet 
      + create   : Create Wallet and Save Wallet into the Container
      + airdrop  : Add SOL to Wallet
@@ -137,6 +143,19 @@ EOF
     docker exec -it solanaX /bin/bash 
     exit   
 ;;
+   'reset')
+    echo "Stop Container"
+    docker stop  $(docker ps -a |grep solanaX |awk '{ print $1 }' )
+    echo "Start Container"
+    docker start $(docker ps -a |grep solanaX |awk '{ print $1 }' )
+    exit
+;;
+   'delete')
+    echo "Delete Container Enviroment"
+    docker stop solanaX
+    docker rm solanaX
+    exit
+;;
    'release')
     docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
@@ -199,19 +218,6 @@ EOF
 EOF
    exit
 ;;
-   'reset')
-    echo "Stop Container"
-    docker stop  $(docker ps -a |grep solanaX |awk '{ print $1 }' )
-    echo "Start Container"
-    docker start $(docker ps -a |grep solanaX |awk '{ print $1 }' )
-    exit
-;;
-'delete')
-    echo "Delete Container Enviroment"
-    docker stop solanaX
-    docker rm solanaX
-    exit
-;;
 esac
 fi
 
@@ -247,7 +253,8 @@ exit
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    solana-keygen pubkey $WALLET_FILE
-   solana airdrop 5 $_ $WALLET_FILE --url  $SOLANA_CHAIN
+   echo $_
+   solana airdrop 5 $_ $WALLET_FILE --url $SOLANA_CHAIN
    exit
 EOF
 exit
@@ -271,11 +278,13 @@ fi
 
 ## ----------------------  END WALLET -------------------------
 
-## ----------------------  MAIN  ------------------------------
+## ----------------------  BEGIN LOCNET -------------------------
 
-case "$1" in
-'run')
-docker exec -i solanaX /bin/bash -s <<EOF 
+if [ "$1" = "locnet" ]
+then
+   case "$2" in 
+  'run')
+   docker exec -i solanaX /bin/bash -s <<EOF 
    export PATH=$_path
    echo "Running Solana  Test Validator.........."
    cd /usr/local/solana
@@ -284,23 +293,41 @@ docker exec -i solanaX /bin/bash -s <<EOF
 EOF
 exit
 ;;
-'log')
-docker exec -i solanaX /bin/bash -s <<EOF 
+  'status')
+   docker exec -i solanaX /bin/bash -s <<EOF 
    export PATH=$_path
-   netstat -an | grep LISTEN
-   #tail -30 /usr/local/solana/test-ledger/validator.log
+   echo "Running Solana  Test Validator.........."
+   ps -fea | grep solana
+   nohup solana-test-validator > /dev/null 2>&1 &
    exit
 EOF
 exit
 ;;
-'info')
-docker exec -i solanaX /bin/bash -s <<EOF
+   'log')
+   docker exec -i solanaX /bin/bash -s <<EOF 
    export PATH=$_path
-   solana program show --buffers --all --keypair /usr/local/solana/walletid.json   --url http://localhost:8899
+   tail -30 /usr/local/solana/test-ledger/validator.log
    exit
 EOF
 exit
 ;;
+   'info')
+   docker exec -i solanaX /bin/bash -s <<EOF
+   export PATH=$_path
+   solana program show --buffers --all --keypair $WALLET_FILE   --url $SOLANA_CHAIN
+   exit
+EOF
+exit
+;;
+esac
+fi
+
+## ----------------------  END LOCNET -------------------------
+
+
+## ----------------------  MAIN  ------------------------------
+
+case "$1" in
 'help')
 help 
 ;; 

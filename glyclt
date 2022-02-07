@@ -35,7 +35,15 @@ call2cmd () {
    $1
    exit
 EOF
-  
+}
+
+isPIDrun () {
+    if pgrep -x $2 >/dev/null
+   then
+    echo "$1 is running"
+   else
+    echo "$1 stopped" 
+   fi
 }
 
 version () {
@@ -296,9 +304,7 @@ exit
   'status')
    docker exec -i solanaX /bin/bash -s <<EOF 
    export PATH=$_path
-   echo "Running Solana  Test Validator.........."
-   ps -fea | grep solana
-   nohup solana-test-validator > /dev/null 2>&1 &
+   isPIDrun solana
    exit
 EOF
 exit

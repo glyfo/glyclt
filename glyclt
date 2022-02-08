@@ -248,7 +248,7 @@ exit
    export PATH=$_path 
    solana-keygen pubkey $WALLET_FILE > /usr/local/xtmp 
    read -r pubkey</usr/local/xtmp 
-   echo "PK : $pubkey"
+   echo "PK1 : $pubkey"
    exit 
 EOF
 exit

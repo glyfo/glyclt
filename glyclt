@@ -294,13 +294,11 @@ exit
   'status')
    docker exec -i solanaX /bin/bash -s <<EOF 
    export PATH=$_path
-   ps -fea|grep -v grep |grep solana > /dev/null
-   result=$?
-    echo "exit code: ${result}"
-   if [ "${result}" -eq "0" ] ; then
-    echo "`date`: solana local chain  service running, everything is fine"
+   if ps ax | grep -v grep | grep solana > /dev/null
+   then
+    echo "solana local chain is running"
    else
-    echo "`date`: solana local chain  is not running"
+    echo "solsna local chain is not running"
    fi
    exit
 EOF

@@ -284,9 +284,13 @@ then
   'run')
    docker exec -i solanaX /bin/bash -s <<EOF 
    export PATH=$_path
-   echo "Running Solana  Test Validator.........."
    cd /usr/local/solana
-   nohup solana-test-validator > /dev/null 2>&1 &
+   if nohup solana-test-validator > /dev/null 2>&1 &
+   then
+    echo "[OK] Solana Local Chain"
+   else
+    echo "[NOK] Solana Local Chain"
+   fi
    exit
 EOF
 exit
@@ -307,9 +311,13 @@ exit
   'reset')
    docker exec -i solanaX /bin/bash -s <<EOF 
    export PATH=$_path
-   echo "Running Solana  Test Validator.........."
    rm -rf /usr/local/solana/test-ledger
-   killall $(ps -fea | grep solana)
+   if killall $(ps -fea | grep solana)
+   then
+    echo "[OK] Solana Local Chain"
+   else
+    echo "[NOK] Solana Local Chain"
+   fi   
    exit
 EOF
 exit
@@ -325,7 +333,7 @@ exit
    'info')
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
-   solana program show --buffers --all --keypair $WALLET_FILE   --url $SOLANA_CHAIN
+   solana program show --buffers --all --keypair $WALLET_FILE --url $SOLANA_CHAIN
    exit
 EOF
 exit

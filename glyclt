@@ -249,7 +249,6 @@ exit
    solana-keygen pubkey $WALLET_FILE > /usr/local/xtmp 
    exit 
 EOF
-exit
  docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path 
    echo "PK"

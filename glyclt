@@ -298,7 +298,7 @@ exit
    then
     echo "solana local chain is running"
    else
-    echo "solsna local chain is not running"
+    echo "solana local chain is not running"
    fi
    exit
 EOF

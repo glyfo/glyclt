@@ -261,7 +261,7 @@ exit
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path 
    solana-keygen pubkey $WALLET_FILE | read pubkey
-   if solana balance $pubkey --url $SOLANA_CHAIN > /dev/null
+   if solana balance $pubkey $WALLET_FILE --url $SOLANA_CHAIN > /dev/null
    then
     echo "[OK] Wallet Airdrop"
    else

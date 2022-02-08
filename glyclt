@@ -256,7 +256,7 @@ exit
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path 
    solana-keygen pubkey $WALLET_FILE 
-   solana balance $_ $WALLET_FILE --url $SOLANA_CHAIN
+   solana balance $_ --url $SOLANA_CHAIN
    exit
 EOF
 exit

@@ -247,7 +247,8 @@ exit
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path 
    solana-keygen pubkey $WALLET_FILE > /usr/local/xtmp 
-   cat /usr/local/xtmp
+   pubkey=$(cat /usr/local/xtmp)
+   echo "PK : $pubkey"
    exit 
 EOF
 exit

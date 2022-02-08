@@ -246,8 +246,7 @@ exit
    'airdrop')
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
-   shopt -s lastpipe
-   solana-keygen pubkey $WALLET_FILE | read pubkey
+   pubkey=$(solana-keygen pubkey $WALLET_FILE )
    echo "PK : ${pubkey}"
    solana airdrop 5 $pubkey $WALLET_FILE --url $SOLANA_CHAIN
    exit
@@ -257,8 +256,7 @@ exit
    'balance')
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path 
-   shopt -s lastpipe
-   solana-keygen pubkey $WALLET_FILE | read pubkey
+   pubkey=$(solana-keygen pubkey $WALLET_FILE )
    echo "PK : ${pubkey}"
    solana balance $pubkey $WALLET_FILE --url $SOLANA_CHAIN 
    exit

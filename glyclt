@@ -247,7 +247,7 @@ exit
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path 
    solana-keygen pubkey $WALLET_FILE
-   echo "repeat $_ $! $1"
+   echo "repeat $_ $! $?  $$ $- $@ $*"
    solana airdrop 5 $pubkey /usr/local/solana/walletid.json --url $SOLANA_CHAIN
    exit 
 EOF

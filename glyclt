@@ -246,14 +246,9 @@ exit
    'airdrop')
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path 
-   solana-keygen pubkey $WALLET_FILE > pk
-   exit 
-EOF
-   docker exec -i solanaX /bin/bash -s <<EOF
-   export PATH=$_path
-   echo "PK" 
-   cat pk
-   solana airdrop 5 $(cat pk) $WALLET_FILE --url $SOLANA_CHAIN
+   solana-keygen pubkey $WALLET_FILE > /usr/local/solana/pk
+   cat /usr/local/solana/pk
+   solana airdrop 5 $(cat /usr/local/solana/pk) $WALLET_FILE --url $SOLANA_CHAIN
    exit 
 EOF
 exit
@@ -261,14 +256,9 @@ exit
    'balance')
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path 
-   solana-keygen pubkey $WALLET_FILE > pk
-   exit 
-EOF
-   docker exec -i solanaX /bin/bash -s <<EOF
-   export PATH=$_path
-   echo "PK" 
-   cat pk
-   solana balance $(cat pk) $WALLET_FILE --url $SOLANA_CHAIN 
+   solana-keygen pubkey $WALLET_FILE > /usr/local/solana/pk
+   cat /usr/local/solana/pk
+   solana balance $(cat /usr/local/solana/pk) $WALLET_FILE --url $SOLANA_CHAIN 
    exit 
 EOF
 exit

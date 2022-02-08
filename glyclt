@@ -296,9 +296,9 @@ exit
    export PATH=$_path
    if ps ax | grep -v grep | grep solana > /dev/null
    then
-    echo "solana local chain is running"
+    echo "[OK] Solana Local Chain"
    else
-    echo "solana local chain is not running"
+    echo "[NOK] Solana Local Chain"
    fi
    exit
 EOF

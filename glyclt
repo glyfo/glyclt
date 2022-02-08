@@ -229,10 +229,8 @@ if [ "$1" = "wallet" ]
 then
    case "$2" in 
    'create')
-   echo "Create Wallet .........."
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
-   echo "Wallet creation .........."
    solana config set --url $SOLANA_CHAIN
    solana-keygen new -f -s --no-bip39-passphrase --outfile $WALLET_FILE  
    echo '-----------------------Public Key ------------------------'
@@ -240,33 +238,25 @@ then
    echo '----------------------------------------------------------'
    echo '-----------------------Private Key -----------------------'
    cat $WALLET_FILE   
-   echo ''
    echo '----------------------------------------------------------'
    exit
 EOF
 exit
 ;;
    'airdrop')
-   echo "Airdrop Wallet .........."
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
-   solana-keygen pubkey $WALLET_FILE
-   echo $_
+   solana-keygen pubkey $WALLET_FILE 
    solana airdrop 5 $_ $WALLET_FILE --url $SOLANA_CHAIN
    exit
 EOF
 exit
 ;;
    'balance')
-   echo "Airdrop Wallet .........."
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path 
-   export pubkey=$(solana-keygen pubkey $WALLET_FILE  )
-   echo '----------------------------------------------------------'
-   echo "Public Key:"
-   printf '%s\n' "$(solana-keygen pubkey $WALLET_FILE  )" 
-   echo '----------------------------------------------------------'
-   solana balance $pubkey  --url $SOLANA_CHAIN
+   solana-keygen pubkey $WALLET_FILE 
+   solana airdrop 5 $_ $WALLET_FILE --url $SOLANA_CHAIN
    exit
 EOF
 exit

@@ -249,7 +249,9 @@ exit
    solana-keygen pubkey $WALLET_FILE > pk
    sleep 2
    echo "PK"
-   cat pk
+   if [ -f pk ]; then
+    cat pk
+   fi
    solana airdrop 5 $(cat pk) $WALLET_FILE --url $SOLANA_CHAIN
    rm pk
    exit
@@ -262,7 +264,9 @@ exit
    solana-keygen pubkey $WALLET_FILE > pk
    sleep 2
    echo "PK"
-   echo pk
+   if [ -f pk ]; then
+    cat pk
+   fi
    solana balance $(cat pk) $WALLET_FILE --url $SOLANA_CHAIN 
    rm pk
    exit

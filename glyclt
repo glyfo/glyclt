@@ -246,8 +246,7 @@ exit
    'airdrop')
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
-   pubkey=`solana-keygen pubkey $WALLET_FILE`
-   echo "Public Key : $pubkey"
+   solana-keygen pubkey $WALLET_FILE | read pubkey
    solana airdrop 5 $pubkey $WALLET_FILE --url $SOLANA_CHAIN
    exit
 EOF

@@ -231,8 +231,8 @@ then
    'create')
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
-   solana config set --url $SOLANA_CHAIN
-   solana-keygen new -f -s --no-bip39-passphrase --outfile $WALLET_FILE  
+   solana config set --url $SOLANA_CHAIN > /dev/null 
+   solana-keygen new -f -s --no-bip39-passphrase --outfile $WALLET_FILE  > /dev/null
    echo '-----------------------Public Key ------------------------'
    solana-keygen pubkey $WALLET_FILE 
    echo '----------------------------------------------------------'
@@ -246,7 +246,7 @@ exit
    'airdrop')
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
-   solana-keygen pubkey $WALLET_FILE 
+   solana-keygen pubkey $WALLET_FILE > /dev/null
    solana airdrop 5 $_ $WALLET_FILE --url $SOLANA_CHAIN
    exit
 EOF
@@ -256,7 +256,7 @@ exit
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path 
    solana-keygen pubkey $WALLET_FILE 
-   solana airdrop 5 $_ $WALLET_FILE --url $SOLANA_CHAIN
+   solana balance $_ $WALLET_FILE --url $SOLANA_CHAIN
    exit
 EOF
 exit

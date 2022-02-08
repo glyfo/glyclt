@@ -248,6 +248,12 @@ exit
    export PATH=$_path
    solana-keygen pubkey $WALLET_FILE | read pubkey
    solana airdrop 5 $pubkey $WALLET_FILE --url $SOLANA_CHAIN
+    if solana airdrop 5 $pubkey $WALLET_FILE --url $SOLANA_CHAIN > /dev/null 2>&1 &
+   then
+    echo "[OK] Solana Airdrop on pubkey :\$($_)"
+   else
+    echo "[NOK] Solana Local Chain"
+   fi
    exit
 EOF
 exit

@@ -62,7 +62,7 @@ ${b}+ locnet${n}        : Handler Solana Local Chain
 ${b}+ wallet${n}        : Handler Wallet 
      + create   : Create Dad Moon & Sun Wallet
      + airdrop  : Add SOL to  Wallet
-     + balance  : Review Wallet Balance
+     + balance  : Review Wallet Balance 
 ${b}+ anchor${n}        : Solana FrameWork 
      + init     : Create Project Folder 
      + build    : Compile Program

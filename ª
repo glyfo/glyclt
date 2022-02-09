@@ -1,0 +1,17 @@
+#!/bin/ksh
+
+_path="/usr/local/solana/bin:/usr/local/cargo/bin:/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
+
+SOLANA_VERSION=v1.9.5
+ANCHOR_VERSION=v0.20.1
+SOLANA_CHAIN="http://localhost:8899"
+WALLET_FILE="/usr/local/solana/walletid.json"
+
+docker exec -i solanaX /bin/bash -s <<EOF
+   export PATH=$_path 
+   pubkey=$(solana-keygen pubkey "/usr/local/solana/walletid.json" )
+   echo $pubkey 
+   exit 
+EOF
+exit
+

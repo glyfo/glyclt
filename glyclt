@@ -281,28 +281,6 @@ exit
 EOF
 exit
 ;;
-   'transfer')
-   echo -n "Transfer DAD to | MOON(M) | SUN(S) :  " 
-   read _who
-   if [ $_who = "M" ]
-   then
-       WALLET=$WALLET_MOON
-   elif [ $_who = "S" ]
-   then 
-       WALLET=$WALLET_SUN
-   else 
-     echo -n "Please | MOON(M) | SUN(S)"
-     exit 
-   fi
-
-   docker exec -i solanaX /bin/bash -s <<EOF
-   export PATH=$_path
-   solana-keygen pubkey $WALLET | awk  -v wallet="${WALLET}" -v chain="${SOLANA_CHAIN}"  \
-   '{ print "PK:" \$1; system("exec /usr/local/solana/bin/solana balance " \$1 " --url " chain ) }'
-   exit 
-EOF
-exit
-;;
 esac
 fi
 

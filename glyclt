@@ -249,7 +249,7 @@ exit
    solana-keygen pubkey $WALLET_FILE | awk \
    -v wallet="${WALLET_FILE}"              \
    -v chain="${SOLANA_CHAIN}"              \
-  '{ print "PUBKEY"; print $1 ; print ""; system("exec /usr/local/solana/bin/solana airdrop 5 " $1 wallet " --url " chain ) }'
+  '{ print "PUBKEY"; print $0 ; print ""; system("exec /usr/local/solana/bin/solana airdrop 5 " $0 wallet " --url " chain ) }'
    exit
 EOF
 exit
@@ -262,7 +262,7 @@ exit
    solana-keygen pubkey $WALLET_FILE | awk \
    -v wallet="${WALLET_FILE}"              \
    -v chain="${SOLANA_CHAIN}"              \
-  '{ print "PUBKEY"; print $1 ; print ""; system("exec /usr/local/solana/bin/solana balance " $1 " --url " chain ) }'
+  '{ print "PUBKEY"; print $0 ; print ""; system("exec /usr/local/solana/bin/solana balance " $0 " --url " chain ) }'
    exit
    exit 
 EOF

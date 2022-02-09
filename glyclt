@@ -194,8 +194,15 @@ if [ "$1" = "anchor" ]
 then
    case "$2" in 
    'init')
-   call2cmd "anchor init hello"
-   ;;
+   echo -n "Project Name: " 
+   read _what
+   docker exec -i solanaX /bin/bash -s <<EOF 
+   export PATH=$_path
+   anchor init $_what
+   exit
+EOF
+   exit   
+;;
    'build')
    echo "Building Smart Contract .........."
    docker exec -i solanaX /bin/bash -s <<EOF

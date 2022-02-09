@@ -244,7 +244,7 @@ EOF
 exit
 ;;
    'airdrop')
-   docker exec -i solanaX /bin/ksh -s <<EOF
+   docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path 
    solana-keygen pubkey $WALLET_FILE | awk \
    -v wallet="${WALLET_FILE}"              \
@@ -257,7 +257,7 @@ EOF
 exit
 ;;
    'balance')
-   docker exec -i solanaX /bin/ksh -s <<EOF
+   docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path 
    solana-keygen pubkey $WALLET_FILE | awk \
    -v wallet="${WALLET_FILE}"              \

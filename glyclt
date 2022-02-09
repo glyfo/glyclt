@@ -60,7 +60,7 @@ ${b}+ locnet${n}        : Handler Solana Local Chain
      + log      : View Solana Local Chain Logger
      + reset    : Delete Data of Solana Local Chain 
 ${b}+ wallet${n}        : Handler Wallet 
-     + create   : Create Main Wallet and Save into the Container
+     + create   : Create Dad Moon & Sun  Wallet
      + airdrop  : Add SOL to Main Wallet
      + balance  : Review Main Wallet Balance
 ${b}+ anchor${n}        : Solana FrameWork 
@@ -230,7 +230,7 @@ fi
 if [ "$1" = "wallet" ]
 then
    case "$2" in 
-   'Dad')
+   'config')
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    solana config set --url $SOLANA_CHAIN > /dev/null 
@@ -257,18 +257,22 @@ EOF
 exit
 ;;
    'balance')
-   echo "Balance | DAD(D) | MOON(M) | SUN(S) : " 
+   echo -n "Balance | DAD(D) | MOON(M) | SUN(S) : " 
    read _who
-   if [ "_who" = "D" ]
+   if [ $_who = "D" ]
    then
        WALLET=$WALLET_DAD
-   else if [ "_who" = "M" ]
+   elif [ $_who = "M" ]
    then 
        WALLET=$WALLET_MOON
-   else if [ "_who" = "S" ]
+   elif [ $_who = "S" ]
    then 
        WALLET=$WALLET_SUN
+   else 
+     echo -n "Please | DAD(D) | MOON(M) | SUN(S)"
+     exit 
    fi
+
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    solana-keygen pubkey $WALLET | awk  -v wallet="${WALLET}" -v chain="${SOLANA_CHAIN}"  \

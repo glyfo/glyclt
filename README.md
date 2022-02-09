@@ -32,9 +32,9 @@ $ glyclt
      + log      : View Solana Local Chain Logger
      + reset    : Delete Data of Solana Local Chain 
 + wallet        : Handler Wallet 
-     + create   : Create Main Wallet and Save into the Container
-     + airdrop  : Add SOL to Main Wallet
-     + balance  : Review Main Wallet Balance
+     + create   : Create Dad Moon & Sun Wallet
+     + airdrop  : Add SOL to  Wallet
+     + balance  : Review Wallet Balance
 + anchor        : Solana FrameWork 
      + init     : Create Project Folder 
      + build    : Compile Program

@@ -60,9 +60,9 @@ ${b}+ locnet${n}        : Handler Solana Local Chain
      + log      : View Solana Local Chain Logger
      + reset    : Delete Data of Solana Local Chain 
 ${b}+ wallet${n}        : Handler Wallet 
-     + create   : Create Dad Moon & Sun  Wallet
-     + airdrop  : Add SOL to Main Wallet
-     + balance  : Review Main Wallet Balance
+     + create   : Create Dad Moon & Sun Wallet
+     + airdrop  : Add SOL to  Wallet
+     + balance  : Review Wallet Balance
 ${b}+ anchor${n}        : Solana FrameWork 
      + init     : Create Project Folder 
      + build    : Compile Program

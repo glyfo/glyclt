@@ -230,7 +230,7 @@ fi
 if [ "$1" = "wallet" ]
 then
    case "$2" in 
-   'config')
+   'create')
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    solana config set --url $SOLANA_CHAIN > /dev/null 

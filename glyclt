@@ -17,7 +17,9 @@
 SOLANA_VERSION=v1.9.5
 ANCHOR_VERSION=v0.20.1
 SOLANA_CHAIN="http://localhost:8899"
-WALLET_FILE="/usr/local/solana/walletid.json"
+WALLET_DAD="/usr/local/solana/walletdad.json"
+WALLET_MOON="/usr/local/solana/walletmoon.json"
+WALLET_SUN="/usr/local/solana/walletsun.json"
 
 
 ## ----------------------  GLOBAL --------------------------
@@ -228,17 +230,19 @@ fi
 if [ "$1" = "wallet" ]
 then
    case "$2" in 
-   'create')
+   'Dad')
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    solana config set --url $SOLANA_CHAIN > /dev/null 
-   solana-keygen new -f -s --no-bip39-passphrase --outfile $WALLET_FILE  > /dev/null
-   echo '-----------------------Public Key ------------------------'
-   solana-keygen pubkey $WALLET_FILE 
-   echo '----------------------------------------------------------'
-   echo '-----------------------Private Key -----------------------'
-   cat $WALLET_FILE   
-   echo '----------------------------------------------------------'
+   solana-keygen new -f -s --no-bip39-passphrase --outfile $WALLET_DAD  > /dev/null
+   solana-keygen new -f -s --no-bip39-passphrase --outfile $WALLET_MOON > /dev/null
+   solana-keygen new -f -s --no-bip39-passphrase --outfile $WALLET_SUN  > /dev/null
+   echo '-----------------------Public Key DAD  ------------------------'
+   solana-keygen pubkey $WALLET_MOON 
+   echo '-----------------------Public Key MOON ------------------------'
+   solana-keygen pubkey $WALLET_MOON 
+   echo '-----------------------Public Key SUN  ------------------------'
+   solana-keygen pubkey $WALLET_MOON 
    exit
 EOF
 exit
@@ -246,10 +250,8 @@ exit
    'airdrop')
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path 
-   solana-keygen pubkey $WALLET_FILE | awk \
-   -v wallet="${WALLET_FILE}"              \
-   -v chain="${SOLANA_CHAIN}"              \
-  '{ print "PUBKEY"; print $0 ; print ""; system("exec /usr/local/solana/bin/solana airdrop 5 " $0 wallet " --url " chain ) }'
+   solana-keygen pubkey $WALLET_DAD | awk -v wallet="${WALLET_DAD}" -v chain="${SOLANA_CHAIN}"  \
+  '{ print "PK:" \$1;print ""; system("exec /usr/local/solana/bin/solana airdrop 5 " \$1   " --url " chain ) }'
    exit
 EOF
 exit
@@ -258,12 +260,9 @@ exit
 ;;
    'balance')
    docker exec -i solanaX /bin/bash -s <<EOF
-   export PATH=$_path 
-   solana-keygen pubkey $WALLET_FILE | awk \
-   -v wallet="${WALLET_FILE}"              \
-   -v chain="${SOLANA_CHAIN}"              \
-  '{ print "PUBKEY"; print $0 ; print ""; system("exec /usr/local/solana/bin/solana balance " $0 " --url " chain ) }'
-   exit
+   export PATH=$_path
+   solana-keygen pubkey $WALLET_DAD | awk  -v wallet="${WALLET_DAD}" -v chain="${SOLANA_CHAIN}"  \
+   '{ print "PK:" \$1; system("exec /usr/local/solana/bin/solana balance " \$1 " --url " chain ) }'
    exit 
 EOF
 exit

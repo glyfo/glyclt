@@ -238,11 +238,11 @@ then
    solana-keygen new -f -s --no-bip39-passphrase --outfile $WALLET_MOON > /dev/null
    solana-keygen new -f -s --no-bip39-passphrase --outfile $WALLET_SUN  > /dev/null
    echo '-----------------------Public Key DAD  ------------------------'
-   solana-keygen pubkey $WALLET_MOON 
+   solana-keygen pubkey $WALLET_DAD 
    echo '-----------------------Public Key MOON ------------------------'
    solana-keygen pubkey $WALLET_MOON 
    echo '-----------------------Public Key SUN  ------------------------'
-   solana-keygen pubkey $WALLET_MOON 
+   solana-keygen pubkey $WALLET_SUN 
    exit
 EOF
 exit

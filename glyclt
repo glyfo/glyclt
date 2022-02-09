@@ -329,7 +329,7 @@ exit
    'info')
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
-   solana program show --buffers --all --keypair $WALLET_FILE --url $SOLANA_CHAIN
+   solana program show --buffers --all --keypair $WALLET_DAD --url $SOLANA_CHAIN
    exit
 EOF
 exit

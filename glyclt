@@ -207,9 +207,10 @@ EOF
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    export RUST_BACKTRACE=full
-   echo "Program:$3"
-   cd /usr/src/$3
-   anchor build 
+   home=$(pwd | sed 's#.*/##')
+   echo "Proyect:\$home"
+   cd /usr/src/\$home
+   echo $PWD
    # anchor idl parse -f src/lib.rs -o target/idl/rcp-mapping.json
    exit
 EOF   

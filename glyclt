@@ -204,18 +204,16 @@ EOF
    exit   
 ;;
    'build')
-   echo "Building Smart Contract .........."
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    export RUST_BACKTRACE=full
-   anchor build .
+   anchor build /usr/src/$2
    # anchor idl parse -f src/lib.rs -o target/idl/rcp-mapping.json
    exit
 EOF   
    exit
 ;;
    'deploy')
-   echo "Deploy  .........."
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    cd counter

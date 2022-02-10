@@ -9,7 +9,6 @@
 #####################################################################################
 
 # ---------------------- TIPS -------------------------------
-#   export PATH=$_path - variable _path is a global var 
 #   echo $PWD          -  regular dollar char for outer (i.e. local) variables, e.g. 
 #   echo \$PWD         -  escaped dollar char for inner (i.e. remote) variables, e.g.
 
@@ -38,13 +37,9 @@ call2cmd () {
 EOF
 }
 
-version () {
-   echo "glyclt 0.0.2"
-}
-
 help () {
-   echo "${n} Usage: ${b} glyclt ${n}
-
+   echo "${n} Usage: ${b} glyclt ${n} 
+   echo "v 0.2.1"
 ${b}+ setup${n}         : Handler Container to Compile & Install Software 
      + solana   : Compile & Install Solana Tools & Node into Container
      + anchor   : Compile & Install Anchor into Container

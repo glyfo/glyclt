@@ -39,7 +39,8 @@ EOF
 
 help () {
    echo "${n} Usage: ${b} glyclt ${n} 
-   echo "v 0.2.1"
+   v0.2.1
+
 ${b}+ setup${n}         : Handler Container to Compile & Install Software 
      + solana   : Compile & Install Solana Tools & Node into Container
      + anchor   : Compile & Install Anchor into Container

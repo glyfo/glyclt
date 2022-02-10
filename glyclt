@@ -206,7 +206,7 @@ EOF
    home=$(pwd | sed 's#.*/##')
    echo "Proyect:\$home"
    cd /usr/src/\$home
-   echo $PWD
+   anchor build
    # anchor idl parse -f src/lib.rs -o target/idl/rcp-mapping.json
    exit
 EOF   

@@ -208,7 +208,7 @@ EOF
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    export RUST_BACKTRACE=full
-   anchor build $_what
+   anchor build .
    # anchor idl parse -f src/lib.rs -o target/idl/rcp-mapping.json
    exit
 EOF   

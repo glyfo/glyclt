@@ -99,8 +99,9 @@ then
           sed '6 a cargo=cargo' ./scripts/cargo-install-all-fix.sh > ./scripts/cargo-install-all-fix2.sh
           cat ./scripts/cargo-install-all-fix2.sh > ./scripts/cargo-install-all-fix.sh 
           rm  ./scripts/cargo-install-all-fix2.sh
-          bash ./scripts/cargo-install-all-fix.sh --validator-only .
-          cargo build --release --bin solana-test-validator
+          bash ./scripts/cargo-install-all-fix.sh .
+          #cargo build --release --bin solana-test-validator
+          #cargo-build-bpf
           cp /usr/local/solana/target/release/solana-test-validator /usr/local/solana/bin/
           export PATH="/usr/local/solana/bin:/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
           echo '----------------------- Solana Tool Version --------------------------' 
@@ -206,8 +207,10 @@ EOF
    home=$(pwd | sed 's#.*/##')
    echo "Proyect:\$home"
    cd /usr/src/\$home
+   cargo-build-bpf
    anchor build
    # anchor idl parse -f src/lib.rs -o target/idl/rcp-mapping.json
+   # rustup toolchain add 1.53
    exit
 EOF   
    exit

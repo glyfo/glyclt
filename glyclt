@@ -205,10 +205,7 @@ EOF
    home=$(pwd | sed 's#.*/##')
    echo "Proyect:\$home"
    cd /usr/src/\$home
-   cargo-build-bpf
    anchor build
-   # anchor idl parse -f src/lib.rs -o target/idl/rcp-mapping.json
-   # rustup toolchain add 1.53
    exit
 EOF   
    exit
@@ -216,8 +213,14 @@ EOF
    'deploy')
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
-   cd counter
-   solana program deploy -k /usr/local/solana/walletid.json  target/deploy/counter.so --url https://api.devnet.solana.com 
+   export RUST_BACKTRACE=full
+   home=$(pwd | sed 's#.*/##')
+   echo "Proyect:\$home"
+   cd /usr/src/\$home
+   anchor test
+   anchor deploy
+   exit
+   solana program deploy -k $WALLET_DAD  --url $SOLANA_CHAIN
    exit
 EOF
    exit

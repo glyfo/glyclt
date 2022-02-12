@@ -22,7 +22,7 @@ WALLET_SUN="/usr/local/solana/walletsun.json"
 
 
 ## ----------------------  GLOBAL --------------------------
-_path="/usr/local/solana/bin:/usr/local/cargo/bin:/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
+_path="/usr/local/solana/bin:/usr/local/cargo/bin:/bin:/usr/bin"
 
 b=$(tput bold)
 n=$(tput sgr0)
@@ -100,10 +100,8 @@ then
           cat ./scripts/cargo-install-all-fix2.sh > ./scripts/cargo-install-all-fix.sh 
           rm  ./scripts/cargo-install-all-fix2.sh
           bash ./scripts/cargo-install-all-fix.sh .
-          #cargo build --release --bin solana-test-validator
-          #cargo-build-bpf
           cp /usr/local/solana/target/release/solana-test-validator /usr/local/solana/bin/
-          export PATH="/usr/local/solana/bin:/bin:/usr/local/cargo/bin:/usr/bin:/root/.local/share/solana/install/active_release/bin"
+          export PATH="/usr/local/solana/bin:/bin:/usr/local/cargo/bin:/usr/bin"
           echo '----------------------- Solana Tool Version --------------------------' 
           solana -V
           solana-keygen --version

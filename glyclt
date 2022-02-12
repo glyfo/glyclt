@@ -173,6 +173,7 @@ EOF
   + anchor   : Compile & Install Anchor into Container
   + dev      : Install Node,NPM and Yarn into the Container
   + login    : Access to Container 
+  + release  : Show all version of Installed Stack
   + reset    : Restart Container ( Stop & Start ) 
   + delete   : Delete Container
   "

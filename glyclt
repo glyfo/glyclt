@@ -219,8 +219,6 @@ EOF
    echo "Proyect:\$home"
    cd /usr/src/\$home
    anchor test
-   anchor deploy
-   exit
    solana program deploy -k $WALLET_DAD  --url $SOLANA_CHAIN
    exit
 EOF

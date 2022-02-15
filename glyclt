@@ -36,56 +36,49 @@ call2cmd () {
 EOF
 }
 
-help () {
-   echo "${n} Usage: ${b} glyclt ${n} 
-   v0.2.1 "  
-   setup()
-   localnet()
-   wallet()
-   program()
+echo_help () {
+   echo "${n} Usage: ${b} glyclt ${n} v0.2.1 "
+   echo_setup 
+   echo_wallet 
+   echo_localnet 
+   echo_program  
+   echo ""
+   exit
 }
 
-setup () {
-echo "
-${b}+ setup${n}         : Handler Container to Compile & Install Software 
+echo_setup () {
+echo "${b}+ setup${n}         : Handler Container to Compile & Install Software 
      + solana   : Compile & Install Solana Tools & Node into Container
      + anchor   : Compile & Install Anchor into Container
      + dev      : Install Node,NPM and Yarn into the Container
      + login    : Access to Container 
      + reset    : Restart Container ( Stop & Start ) 
-     + delete   : Delete Container
-"
+     + delete   : Delete Container"
 }
 
-localnet () {
-echo "
-${b}+ localnet${n}        : Handler Solana LocalNet Chain
+echo_localnet () {
+echo "${b}+ localnet${n}        : Handler Solana LocalNet Chain
      + run      : Run Solana LocalNet Chain
      + info     : Info of Solana LocalNet Chain
      + status   : Validate if Solana LocalNet Chain is Running
      + restart  : Stop & Start Solana LocalNet Chain
      + log      : View Solana LocalNet Chain Logger
-     + reset    : Delete Data of Solana LocalNet Chain 
-"
+     + reset    : Delete Data of Solana LocalNet Chain"
 }
 
-
-wallet () {
-echo "
-${b}+ wallet${n}        : Handler Wallet 
+echo_wallet () {
+echo "${b}+ wallet${n}        : Handler Wallet 
      + create   : Create Dad Moon & Sun Wallet
      + airdrop  : Add SOL to  Wallet
-     + balance  : Review Wallet Balance 
-"     
+     + balance  : Review Wallet Balance"     
 }
 
-program () {
-echo "
-${b}+ wallet${n}        : Handler Wallet 
-     + create   : Create Dad Moon & Sun Wallet
-     + airdrop  : Add SOL to  Wallet
-     + balance  : Review Wallet Balance 
-"     
+echo_program () {
+echo "${b}+ program${n}        : Handler Anchor Solana FrameWork  
+     + init     : Create Project using clone repo ( https://github.com/glyfo/counter )   
+     + build    : Compile  Program
+     + deploy   : Deploy Program on Solana LocalNet Chain
+     + test     : Running Test"     
 }
 
 
@@ -189,9 +182,8 @@ EOF
    exit
 ;;
    *) 
-   echo "${n} Usage: ${b} glyclt setup ${n}"
-   setup()
-    exit
+   echo "hola"
+   exit
 ;; 
 esac
 fi
@@ -254,9 +246,7 @@ EOF
    exit
 ;;
    *) 
-   echo "${n} Usage: ${b} glyclt anchor ${n}"
-   anchor()
-  exit
+   exit
 esac
 fi
 
@@ -321,8 +311,6 @@ EOF
 exit
 ;;
    *) 
-   echo "${n} Usage: ${b} glyclt anchor ${n}"
-   wallet()
    exit
 esac
 fi
@@ -393,9 +381,7 @@ EOF
 exit
 ;;
    *) 
-   echo "${n} Usage: ${b} glyclt localnet ${n}"
-   localnet()
-  exit
+   exit
 esac
 fi
 
@@ -406,12 +392,12 @@ fi
 
 case "$1" in
 help)
-help() 
+echo "help"
 ;; 
 version)
-version() 
+echo "version"
 ;; 
 *)
-help 
+echo_help
 ;;
 esac

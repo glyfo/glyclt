@@ -341,7 +341,7 @@ then
    if nohup solana-test-validator > /dev/null 2>&1 &
    then
     sleep 3
-    echo "[OK] Solana Local Chain"
+    echo "[OK] Solana Local Chain is Running"
    else
     echo "[NOK] Solana Local Chain"
    fi
@@ -354,7 +354,7 @@ exit
    export PATH=$_path
    if ps ax | grep -v grep | grep solana > /dev/null
    then
-    echo "[OK] Solana Local Chain"
+    echo "[OK] Solana Local Chain is Running"
    else
     echo "[NOK] Solana Local Chain"
    fi
@@ -368,7 +368,7 @@ exit
    rm -rf /usr/local/solana/test-ledger
    if killall $(ps -fea | grep solana)
    then
-    echo "[OK] Solana Local Chain"
+    echo "[OK] Solana Local Chain Reset"
    else
     echo "[NOK] Solana Local Chain"
    fi   

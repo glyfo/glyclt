@@ -1,6 +1,6 @@
 # Glyfo Command Line Tool
 
-Command Line Tool to simplify compile & deploy Smart Contract on Solana
+Command Line Tool to simplify compile & deploy Programs on Solana
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
@@ -8,6 +8,7 @@ Command Line Tool to simplify compile & deploy Smart Contract on Solana
 
 + Docker 
 + wget
++ MacOS
 
 ## Install 
 
@@ -35,17 +36,19 @@ $ glyclt
      + create   : Create Dad Moon & Sun Wallet
      + airdrop  : Add SOL to Dad Wallet
      + balance  : Review Wallet Balance 
-+ anchor        : Solana FrameWork 
-     + init     : Create Project Folder 
++ program       : Solana FrameWork 
+     + init     : Create Anchor Project Folder 
      + build    : Compile Program
-     + deploy   : Deploy Program on Solana Test Node
+     + deploy   : Deploy Program on Solana LocalNet Chain
      + test     : Running Test 
 
 ```
+Nota : is Mandatory to build solanaX Container to use all commands. 
 
-## Building Container 
 
-glyfclt handler communication with docker & container solanaX . glyfolabs folder is mount into the container.
+## Building solanaX Container 
+
+glyfclt handler communication with docker & container solanaX . glyfolabs folder is mount folder into the container.
 
 ```console
 $ mkdir glyfolabs

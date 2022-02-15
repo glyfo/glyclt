@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #####################################################################################
-# Copyright Glyfo Company. 2020. All Rights Reserved.                               #
+# Copyright Glyfo Company. 2022. All Rights Reserved.                               #
 # Apache License, Version 2.0. See LICENSE file in the project root for details.    #
 # name    : Command Line Tool to deploy Smart Contract on Solana                    #
 # website : glyfo.com                                                               #
@@ -18,8 +18,7 @@ ANCHOR_VERSION=v0.21.0
 SOLANA_CHAIN="http://localhost:8899"
 WALLET_DAD="/usr/local/solana/walletdad.json"
 WALLET_MOON="/usr/local/solana/walletmoon.json"
-WALLET_SUN="/usr/local/solana/walletsun.json"
-
+WALLET_SUN="/usr/local/solana/walletsun.json"i
 
 ## ----------------------  GLOBAL --------------------------
 _path="/usr/local/solana/bin:/usr/local/cargo/bin:/bin:/usr/bin"
@@ -39,8 +38,15 @@ EOF
 
 help () {
    echo "${n} Usage: ${b} glyclt ${n} 
-   v0.2.1
+   v0.2.1 "  
+   setup()
+   localnet()
+   wallet()
+   program()
+}
 
+setup () {
+echo "
 ${b}+ setup${n}         : Handler Container to Compile & Install Software 
      + solana   : Compile & Install Solana Tools & Node into Container
      + anchor   : Compile & Install Anchor into Container
@@ -48,24 +54,38 @@ ${b}+ setup${n}         : Handler Container to Compile & Install Software
      + login    : Access to Container 
      + reset    : Restart Container ( Stop & Start ) 
      + delete   : Delete Container
-${b}+ locnet${n}        : Handler Solana Local Chain
-     + run      : Run Solana Local Chain
-     + info     : Info of Solana Local Chain
-     + status   : Validate if Solana Local Chain is Running
-     + restart  : Stop & Start Solana Local Chain
-     + log      : View Solana Local Chain Logger
-     + reset    : Delete Data of Solana Local Chain 
+"
+}
+
+localnet () {
+echo "
+${b}+ localnet${n}        : Handler Solana LocalNet Chain
+     + run      : Run Solana LocalNet Chain
+     + info     : Info of Solana LocalNet Chain
+     + status   : Validate if Solana LocalNet Chain is Running
+     + restart  : Stop & Start Solana LocalNet Chain
+     + log      : View Solana LocalNet Chain Logger
+     + reset    : Delete Data of Solana LocalNet Chain 
+"
+}
+
+
+wallet () {
+echo "
 ${b}+ wallet${n}        : Handler Wallet 
      + create   : Create Dad Moon & Sun Wallet
      + airdrop  : Add SOL to  Wallet
      + balance  : Review Wallet Balance 
-${b}+ anchor${n}        : Solana FrameWork 
-     + init     : Create Project Folder 
-     + build    : Compile Program
-     + deploy   : Deploy Program on Solana Test Node
-     + test     : Running Test 
-${n} "
- 
+"     
+}
+
+program () {
+echo "
+${b}+ wallet${n}        : Handler Wallet 
+     + create   : Create Dad Moon & Sun Wallet
+     + airdrop  : Add SOL to  Wallet
+     + balance  : Review Wallet Balance 
+"     
 }
 
 
@@ -73,7 +93,7 @@ ${n} "
 if [ "$1" = "setup" ]
 then
    case "$2" in 
-   'solana')
+   solana)
    docker stop solanaX
    docker rm solanaX
    docker pull rust
@@ -110,7 +130,7 @@ then
 EOF
    exit
 ;;
-   'anchor')
+   anchor)
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    cd /usr/local 
@@ -120,13 +140,15 @@ EOF
 EOF
    exit
 ;;
-   'dev')
+   dev)
     docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
-   echo '----------------------- Installing NPM --------------------'
+   echo '----------------------- Installing Developer Tools --------------------'
    curl -fsSL https://deb.nodesource.com/setup_16.x | bash - > /dev/null
    apt-get -qq install -y nodejs
-   npm install --global yarn
+   npm i -g yarn                        > /dev/null
+   npm i -g @types/node                 > /dev/null
+   npm i -g @project-serum/anchor-cli   > /dev/null
    node --version
    npm  --version 
    yarn --version
@@ -134,24 +156,24 @@ EOF
 EOF
    exit
 ;;
-   'login')
+   login)
     docker exec -it solanaX /bin/bash 
     exit   
 ;;
-   'reset')
+   reset)
     echo "Stop Container"
     docker stop  $(docker ps -a |grep solanaX |awk '{ print $1 }' )
     echo "Start Container"
     docker start $(docker ps -a |grep solanaX |awk '{ print $1 }' )
     exit
 ;;
-   'delete')
+   delete)
     echo "Delete Container Enviroment"
     docker stop solanaX
     docker rm solanaX
     exit
 ;;
-   'release')
+   release)
     docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    echo '----------------------- Release  --------------------'
@@ -167,17 +189,9 @@ EOF
    exit
 ;;
    *) 
-   echo "${n} Usage: ${b} glyclt setup ${n}
-
-  + solana   : Compile & Install Solana Tools & Node into Container
-  + anchor   : Compile & Install Anchor into Container
-  + dev      : Install Node,NPM and Yarn into the Container
-  + login    : Access to Container 
-  + release  : Show all version of Installed Stack
-  + reset    : Restart Container ( Stop & Start ) 
-  + delete   : Delete Container
-  "
-  exit
+   echo "${n} Usage: ${b} glyclt setup ${n}"
+   setup()
+    exit
 ;; 
 esac
 fi
@@ -189,7 +203,7 @@ fi
 if [ "$1" = "anchor" ]
 then
    case "$2" in 
-   'init')
+   init)
    echo -n "Project Name: " 
    read _what
    docker exec -i solanaX /bin/bash -s <<EOF 
@@ -197,33 +211,52 @@ then
    anchor init $_what
    exit
 EOF
-   exit   
+   exit
 ;;
-   'build')
+   build)
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    export RUST_BACKTRACE=full
+   export ANCHOR_WALLET=$WALLET_DAD
    home=$(pwd | sed 's#.*/##')
    echo "Proyect:\$home"
    cd /usr/src/\$home
+   rm -rf target 
    anchor build
-   exit
-EOF   
-   exit
-;;
-   'deploy')
-   docker exec -i solanaX /bin/bash -s <<EOF
-   export PATH=$_path
-   export RUST_BACKTRACE=full
-   home=$(pwd | sed 's#.*/##')
-   echo "Proyect:\$home"
-   cd /usr/src/\$home
-   anchor test
-   solana program deploy -k $WALLET_DAD  --url $SOLANA_CHAIN
    exit
 EOF
    exit
 ;;
+   deploy)
+   docker exec -i solanaX /bin/bash -s <<EOF
+   export PATH=$_path
+   export RUST_BACKTRACE=full
+   export ANCHOR_WALLET=$WALLET_DAD
+   home=$(pwd | sed 's#.*/##')
+   echo "Proyect:\$home"
+   cd /usr/src/\$home
+   solana program deploy --keypair $WALLET_DAD --url $SOLANA_CHAIN /usr/src/\${home}/target/deploy/\${home}.so 
+   exit
+EOF
+   exit
+;;
+   test)
+   docker exec -i solanaX /bin/bash -s <<EOF
+   export PATH=$_path
+   export RUST_BACKTRACE=full
+   export ANCHOR_WALLET=$WALLET_DAD
+   home=$(pwd | sed 's#.*/##')
+   echo "Proyect:\$home"
+   cd /usr/src/\$home
+   anchor test
+   exit
+EOF
+   exit
+;;
+   *) 
+   echo "${n} Usage: ${b} glyclt anchor ${n}"
+   anchor()
+  exit
 esac
 fi
 
@@ -236,7 +269,7 @@ fi
 if [ "$1" = "wallet" ]
 then
    case "$2" in 
-   'create')
+   create)
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    solana config set --url $SOLANA_CHAIN > /dev/null 
@@ -253,7 +286,7 @@ then
 EOF
 exit
 ;;
-   'airdrop')
+   airdrop)
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path 
    solana-keygen pubkey $WALLET_DAD | awk -v wallet="${WALLET_DAD}" -v chain="${SOLANA_CHAIN}"  \
@@ -262,7 +295,7 @@ exit
 EOF
 exit
 ;;
-   'balance')
+   balance)
    echo -n "Balance | DAD(D) | MOON(M) | SUN(S) : " 
    read _who
    if [ $_who = "D" ]
@@ -287,22 +320,27 @@ exit
 EOF
 exit
 ;;
+   *) 
+   echo "${n} Usage: ${b} glyclt anchor ${n}"
+   wallet()
+   exit
 esac
 fi
 
 ## ----------------------  END WALLET -------------------------
 
-## ----------------------  BEGIN LOCNET -------------------------
+## ----------------------  BEGIN LOCALNET -------------------------
 
-if [ "$1" = "locnet" ]
+if [ "$1" = "localnet" ]
 then
    case "$2" in 
-  'run')
+  run)
    docker exec -i solanaX /bin/bash -s <<EOF 
    export PATH=$_path
    cd /usr/local/solana
    if nohup solana-test-validator > /dev/null 2>&1 &
    then
+    sleep 3
     echo "[OK] Solana Local Chain"
    else
     echo "[NOK] Solana Local Chain"
@@ -354,20 +392,24 @@ exit
 EOF
 exit
 ;;
+   *) 
+   echo "${n} Usage: ${b} glyclt localnet ${n}"
+   localnet()
+  exit
 esac
 fi
 
-## ----------------------  END LOCNET -------------------------
+## ----------------------  END LOCALNET -------------------------
 
 
 ## ----------------------  MAIN  ------------------------------
 
 case "$1" in
-'help')
-help 
+help)
+help() 
 ;; 
-'version')
-version 
+version)
+version() 
 ;; 
 *)
 help 

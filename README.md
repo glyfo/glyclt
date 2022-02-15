@@ -48,7 +48,8 @@ Nota : is Mandatory to build solanaX Container to use all commands.
 
 ## Building solanaX Container 
 
-glyfclt handler communication with docker & container solanaX . glyfolabs folder is mount folder into the container.
+glyfclt handler communication with docker & container solanaX.
+The glyfolabs folder is mount point into the container path /usr/src/ .
 
 ```console
 $ mkdir glyfolabs

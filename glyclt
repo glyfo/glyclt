@@ -95,15 +95,11 @@ then
    docker exec -i solanaX /bin/bash -s <<EOF
           echo '----------------------- Core Tool--------------------------' 
           uname -a
-          apt-get -qq update 
-          apt-get -qq upgrade 
-          apt-get -qq install -y pkg-config build-essential libudev-dev libclang-dev net-tools --no-install-recommends apt-utils
-          rustup component add rustfmt
+          apt-get -qq update                                                                                                        > /dev/null
+          apt-get -qq upgrade                                                                                                       > /dev/null
+          apt-get -qq install -y pkg-config build-essential libudev-dev libclang-dev net-tools --no-install-recommends apt-utils    > /dev/null
+          rustup component add rustfmt                                                                                              > /dev/null
           export PATH=$_path
-          echo '----------------------- Core Tool Version --------------------------' 
-          rustc -V 
-          cargo -V
-          git --version
           echo '----------------------- Building Solana ----------------------------'
           sleep 1
           cd /usr/local 

@@ -14,7 +14,7 @@ Command Line Tool to simplify compile & deploy Programs on Solana
 
 ![Detail](./glyclt.png)
 
-##1- Install 
+## 1- Install 
 
 ```console
 $ wget -O /usr/local/bin/glyclt https://raw.githubusercontent.com/glyfo/glyclt-solana/main/glyclt
@@ -49,7 +49,7 @@ $ glyclt
 ```
 Nota : is Mandatory step 2 to build solanaX Container 
 
-##2- Building solanaX Container 
+## 2- Building solanaX Container 
 
 glyfclt handler communication with docker & container solanaX.
 The glyfolabs folder is mount point into the container path /usr/src/ .
@@ -64,8 +64,9 @@ $ glyfclt setup solana
 
 + All is a Account 
 + Smart Program are Stateless 
-+ Data & Program are separete 
++ Data & Program are separate 
 + System Program support Account creation
++ PDA is a Account wihtout PK signed
 + Token Program support Token creation. ( Funglble & No-Fungible support )
 
 ## Smart Contract Examples 

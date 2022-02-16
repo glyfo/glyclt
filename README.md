@@ -50,7 +50,7 @@ Nota : is Mandatory step 2 to build solanaX Container
 
 ## 2- Building solanaX Container 
 
-The solanaX container has installed software to support Solana Development. 
+The solanaX container installed software to support Solana Development. 
 The glyfolabs folder is mount point into the container path /usr/src/ .
 
 ```console

@@ -1,6 +1,6 @@
 # Glyfo Command Line Tool
 
-Command Line Tool to simplify develop on Solana
+Command Line Tool to simplify develop on Solana . glyfclt handler communication with container solanaX. it installed different tools to support Solana Development.
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
@@ -49,7 +49,7 @@ Nota : is Mandatory step 2 to build solanaX Container
 
 ## 2- Building solanaX Container 
 
-glyfclt handler communication with  container solanaX. it installed different tools to support Solana Development.
+The solanaX container has installed software to support Solana Development. 
 The glyfolabs folder is mount point into the container path /usr/src/ .
 
 ```console

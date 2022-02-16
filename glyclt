@@ -140,7 +140,6 @@ EOF
    curl -fsSL https://deb.nodesource.com/setup_16.x | bash - > /dev/null
    apt-get -qq install -y nodejs
    npm i -g yarn                        > /dev/null
-   npm i -g @types/node                 > /dev/null
    npm i -g @project-serum/anchor-cli   > /dev/null
    node --version
    npm  --version 
@@ -170,6 +169,7 @@ EOF
     docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    echo '----------------------- Release  --------------------'
+   echo  "git            $(git --version |awk '{ print $2 }' )"
    echo  "rustc          $(rustc -V |awk '{ print $2 }' )"
    echo  "cargo          $(cargo -V |awk '{ print $2 }' )"
    echo  "solana         $(solana -V |awk '{ print $2 }' )"
@@ -202,6 +202,8 @@ then
    docker exec -i solanaX /bin/bash -s <<EOF 
    export PATH=$_path
    anchor init $_what
+   npm install --save @types/global-npm
+   
    exit
 EOF
    exit

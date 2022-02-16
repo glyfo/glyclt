@@ -37,12 +37,13 @@ EOF
 }
 
 echo_help () {
-   echo "${n} Usage: ${b} glyclt ${n} v0.3.1 "
+   echo "${n} Usage: ${b} glyclt ${n}"
    echo_setup 
    echo_wallet 
    echo_localnet 
    echo_program  
    echo ""
+   echo "v0.3.1"
    exit
 }
 

@@ -1,6 +1,6 @@
 # Glyfo Command Line Tool
 
-Command Line Tool to simplify compile & deploy Programs on Solana
+Command Line Tool to simplify develop on Solana
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 

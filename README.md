@@ -21,7 +21,6 @@ $ wget -O /usr/local/bin/glyclt https://raw.githubusercontent.com/glyfo/glyclt-s
 $ chmod +x /usr/local/bin/glyclt
 $ glyclt
   Usage: glyclt
-
 + setup         : Handler Container to Compile & Install Software 
      + solana   : Compile & Install Solana Tools & Node into Container
      + anchor   : Compile & Install Anchor into Container
@@ -29,7 +28,7 @@ $ glyclt
      + login    : Access to Container 
      + reset    : Restart Container ( Stop & Start ) 
      + delete   : Delete Container
-+ locnet        : Handler Solana Local Chain
++ localnet      : Handler Solana Local Chain
      + run      : Run Solana Local Chain
      + info     : Info of Solana Local Chain
      + status   : Validate if Solana Local Chain is Running
@@ -45,13 +44,12 @@ $ glyclt
      + build    : Compile Program
      + deploy   : Deploy Program on Solana LocalNet Chain
      + test     : Running Test 
-
 ```
 Nota : is Mandatory step 2 to build solanaX Container 
 
 ## 2- Building solanaX Container 
 
-glyfclt handler communication with docker & container solanaX.
+glyfclt handler communication with  container solanaX. it installed different tools to support Solana Development.
 The glyfolabs folder is mount point into the container path /usr/src/ .
 
 ```console

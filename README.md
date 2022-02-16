@@ -10,7 +10,7 @@ Command Line Tool to simplify compile & deploy Programs on Solana
 + wget
 + MacOS
 
-## Install 
+##1- Install 
 
 ```console
 $ wget -O /usr/local/bin/glyclt https://raw.githubusercontent.com/glyfo/glyclt-solana/main/glyclt
@@ -43,10 +43,9 @@ $ glyclt
      + test     : Running Test 
 
 ```
-Nota : is Mandatory to build solanaX Container to use all commands. 
+Nota : is Mandatory step 2 to build solanaX Container 
 
-
-## Building solanaX Container 
+##2- Building solanaX Container 
 
 glyfclt handler communication with docker & container solanaX.
 The glyfolabs folder is mount point into the container path /usr/src/ .

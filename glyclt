@@ -16,9 +16,9 @@
 SOLANA_VERSION=v1.9.5
 ANCHOR_VERSION=v0.21.0
 SOLANA_CHAIN="http://localhost:8899"
-WALLET_DAD="/usr/local/solana/walletdad.json"
-WALLET_MOON="/usr/local/solana/walletmoon.json"
-WALLET_SUN="/usr/local/solana/walletsun.json"i
+MASTER_WALLET="/usr/local/solana/master_wallet.json"
+ALFA_WALLET="/usr/local/solana/alfa_wallet.json"
+BETA_WALLET="/usr/local/solana/beta_wallet.json"i
 
 ## ----------------------  GLOBAL --------------------------
 _path="/usr/local/solana/bin:/usr/local/cargo/bin:/bin:/usr/bin"
@@ -68,7 +68,7 @@ echo "${b}+ localnet${n}        : Handler Solana LocalNet Chain
 
 echo_wallet () {
 echo "${b}+ wallet${n}        : Handler Wallet 
-     + create   : Create Dad Moon & Sun Wallet
+     + create   : Create Master & Alfa & Beta Wallet
      + airdrop  : Add SOL to  Wallet
      + balance  : Review Wallet Balance"     
 }
@@ -174,6 +174,7 @@ EOF
    echo  "cargo          $(cargo -V |awk '{ print $2 }' )"
    echo  "solana         $(solana -V |awk '{ print $2 }' )"
    echo  "solana-keygen  $(solana-keygen -V |awk '{ print $2 }' )"
+   echo  "solana-test-validator  $(solana-test-validator --version |awk '{ print $2 }' )"
    echo  "node           $(node --version |awk '{ print $1 }' )"  
    echo  "npm            $(npm --version |awk '{ print $1 }' )"  
    echo  "yarn           $(yarn --version |awk '{ print $1 }' )"  
@@ -209,7 +210,7 @@ EOF
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    export RUST_BACKTRACE=full
-   export ANCHOR_WALLET=$WALLET_DAD
+   export ANCHOR_WALLET=$MASTER_WALLET
    home=$(pwd | sed 's#.*/##')
    echo "Proyect:\$home"
    cd /usr/src/\$home
@@ -223,11 +224,11 @@ EOF
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    export RUST_BACKTRACE=full
-   export ANCHOR_WALLET=$WALLET_DAD
+   export ANCHOR_WALLET=$MASTER_WALLET
    home=$(pwd | sed 's#.*/##')
    echo "Proyect:\$home"
    cd /usr/src/\$home
-   solana program deploy --keypair $WALLET_DAD --url $SOLANA_CHAIN /usr/src/\${home}/target/deploy/\${home}.so 
+   solana program deploy --keypair $MASTER_WALLET --url $SOLANA_CHAIN /usr/src/\${home}/target/deploy/\${home}.so 
    exit
 EOF
    exit
@@ -236,7 +237,7 @@ EOF
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    export RUST_BACKTRACE=full
-   export ANCHOR_WALLET=$WALLET_DAD
+   export ANCHOR_WALLET=$MASTER_WALLET
    home=$(pwd | sed 's#.*/##')
    echo "Proyect:\$home"
    cd /usr/src/\$home
@@ -263,11 +264,11 @@ then
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    solana config set --url $SOLANA_CHAIN > /dev/null 
-   solana-keygen new -f -s --no-bip39-passphrase --outfile $WALLET_DAD  > /dev/null
+   solana-keygen new -f -s --no-bip39-passphrase --outfile $MASTER_WALLET  > /dev/null
    solana-keygen new -f -s --no-bip39-passphrase --outfile $WALLET_MOON > /dev/null
    solana-keygen new -f -s --no-bip39-passphrase --outfile $WALLET_SUN  > /dev/null
    echo '-----------------------Public Key DAD  ------------------------'
-   solana-keygen pubkey $WALLET_DAD 
+   solana-keygen pubkey $MASTER_WALLET 
    echo '-----------------------Public Key MOON ------------------------'
    solana-keygen pubkey $WALLET_MOON 
    echo '-----------------------Public Key SUN  ------------------------'
@@ -279,7 +280,7 @@ exit
    airdrop)
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path 
-   solana-keygen pubkey $WALLET_DAD | awk -v wallet="${WALLET_DAD}" -v chain="${SOLANA_CHAIN}"  \
+   solana-keygen pubkey $MASTER_WALLET | awk -v wallet="${MASTER_WALLET}" -v chain="${SOLANA_CHAIN}"  \
   '{ print "PK:" \$1;print ""; system("exec /usr/local/solana/bin/solana airdrop 5 " \$1   " --url " chain ) }'
    exit
 EOF
@@ -290,7 +291,7 @@ exit
    read _who
    if [ $_who = "D" ]
    then
-       WALLET=$WALLET_DAD
+       WALLET=$MASTER_WALLET
    elif [ $_who = "M" ]
    then 
        WALLET=$WALLET_MOON
@@ -375,7 +376,7 @@ exit
    'info')
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
-   solana program show --buffers --all --keypair $WALLET_DAD --url $SOLANA_CHAIN
+   solana program show --buffers --all --keypair $MASTER_WALLET --url $SOLANA_CHAIN
    exit
 EOF
 exit

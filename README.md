@@ -57,7 +57,7 @@ The glyfolabs folder is mount point into the container path /usr/src/ .
 ```console
 $ mkdir glyfolabs
 $ cd glyfolabs
-$ glyfclt setup solana 
+$ glyclt setup solana 
 
 ```
 ## Solana Fundamentals

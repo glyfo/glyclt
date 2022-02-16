@@ -37,7 +37,7 @@ EOF
 }
 
 echo_help () {
-   echo "${n} Usage: ${b} glyclt ${n} v0.2.1 "
+   echo "${n} Usage: ${b} glyclt ${n} v0.3.1 "
    echo_setup 
    echo_wallet 
    echo_localnet 
@@ -265,14 +265,14 @@ then
    export PATH=$_path
    solana config set --url $SOLANA_CHAIN > /dev/null 
    solana-keygen new -f -s --no-bip39-passphrase --outfile $MASTER_WALLET  > /dev/null
-   solana-keygen new -f -s --no-bip39-passphrase --outfile $WALLET_MOON > /dev/null
-   solana-keygen new -f -s --no-bip39-passphrase --outfile $WALLET_SUN  > /dev/null
+   solana-keygen new -f -s --no-bip39-passphrase --outfile $ALFA_WALLET > /dev/null
+   solana-keygen new -f -s --no-bip39-passphrase --outfile $BETA_WALLET  > /dev/null
    echo '-----------------------Public Key DAD  ------------------------'
    solana-keygen pubkey $MASTER_WALLET 
    echo '-----------------------Public Key MOON ------------------------'
-   solana-keygen pubkey $WALLET_MOON 
+   solana-keygen pubkey $ALFA_WALLET 
    echo '-----------------------Public Key SUN  ------------------------'
-   solana-keygen pubkey $WALLET_SUN 
+   solana-keygen pubkey $BETA_WALLET 
    exit
 EOF
 exit
@@ -287,19 +287,19 @@ EOF
 exit
 ;;
    balance)
-   echo -n "Balance | DAD(D) | MOON(M) | SUN(S) : " 
+   echo -n "Wallet Balance | Master(M) | Alfa(A) | Beta(B)"
    read _who
-   if [ $_who = "D" ]
+   if [ $_who = "M" ]
    then
        WALLET=$MASTER_WALLET
-   elif [ $_who = "M" ]
+   elif [ $_who = "A" ]
    then 
-       WALLET=$WALLET_MOON
-   elif [ $_who = "S" ]
+       WALLET=$ALFA_WALLET
+   elif [ $_who = "B" ]
    then 
-       WALLET=$WALLET_SUN
+       WALLET=$BETA_WALLET
    else 
-     echo -n "Please | DAD(D) | MOON(M) | SUN(S)"
+     echo -n "Please Wallet Balance | Master(M) | Alfa(A) | Beta(B)"
      exit 
    fi
 
@@ -394,9 +394,6 @@ fi
 case "$1" in
 help)
 echo "help"
-;; 
-version)
-echo "version"
 ;; 
 *)
 echo_help

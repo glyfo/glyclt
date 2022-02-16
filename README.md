@@ -10,6 +10,10 @@ Command Line Tool to simplify compile & deploy Programs on Solana
 + wget
 + MacOS
 
+## Introduction 
+
+![Detail](./glyclt.png)
+
 ##1- Install 
 
 ```console

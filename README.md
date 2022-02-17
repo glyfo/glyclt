@@ -61,7 +61,8 @@ $ glyclt setup solana
 ```
 ## Solana Fundamentals
 
-+ All is a Account 
++ Everything is an Account
++ Programs are Accounts 
 + Smart Program are Stateless 
 + Data & Program are separate 
 + System Program support Account creation

@@ -63,9 +63,10 @@ $ glyclt setup solana
 
 + Everything is an Account
 + Programs are Accounts 
-+ Smart Program are Stateless 
++ Program are Stateless 
 + Data & Program are separate 
 + System Program support Account creation
++ Program are owners of Acccount created
 + PDA is a Account wihtout PK signed
 + Token Program support Token creation. ( Funglble & No-Fungible support )
 

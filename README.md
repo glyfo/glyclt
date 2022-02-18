@@ -9,7 +9,7 @@ glyfclt handler communication with container solanaX. it installed different too
 
 + Docker 
 + wget
-+ MacOS
++ MacOS ( x86_64 )
 
 ## Introduction 
 
@@ -62,13 +62,13 @@ $ glyclt setup solana
 ## Solana Fundamentals
 
 + Everything is an Account
-+ Programs are Accounts 
-+ Program are Stateless 
++ Programs are Accounts & Stateless 
 + Data & Program are separate 
-+ System Program support Account creation
 + Program are owners of Acccount created
-+ PDA is a Account wihtout PK signed
-+ Token Program support Token creation. ( Funglble & No-Fungible support )
++ PDA is a Account wihtout signed
++ System Program create Account
++ SPL Program create Token Account 
++ Account pay Storage Use Rent  
 
 ## Smart Contract Examples 
 

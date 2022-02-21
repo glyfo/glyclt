@@ -11,9 +11,9 @@ glyfclt handler communication with container solanaX. it installed different too
 + wget
 + MacOS ( x86_64 )
 
-## Introduction 
+## Glyfo Model 
 
-![Detail](./glyclt.png)
+![Detail](./glyfo.png)
 
 ## 1- Install 
 

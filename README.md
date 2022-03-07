@@ -1,6 +1,5 @@
-# Glyfo Command Line Tool
+# Command Line Tool to simplify develop on Solana.
 
-Command Line Tool to simplify develop on Solana. 
 glyfclt handler communication with container solanaX. 
 it installed different tools to support Solana Development.
 

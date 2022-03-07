@@ -13,7 +13,7 @@ glyfclt handler communication with container solanaX. it installed different too
 
 ## Glyfo Model 
 
-![Detail](./glyfo.png)
+![Detail](./glyclt.png)
 
 ## 1- Install 
 

@@ -47,7 +47,7 @@ $ glyclt
      + deploy   : Deploy Program on Solana LocalNet Chain
      + test     : Running Test 
 ```
-Nota : is Mandatory step 2 to build solanaX Container 
+Nota : is Mandatory setup command to build solanaX Container 
 
 ## 2- Building solanaX Container 
 

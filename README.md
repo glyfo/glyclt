@@ -1,7 +1,8 @@
-# Command Line Tool to simplify develop on Solana.
+# Command Line Tool to support web3 Development.
 
-glyfclt handler communication with container solanaX. 
-it installed different tools to support Solana Development.
+glyfclt handler communication with solanaX Container. 
+The script install tools to support Web3 Development
+on Solana Blockchain.
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 

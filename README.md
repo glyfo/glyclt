@@ -1,4 +1,4 @@
-# Command Line Tool to support web3 Development.
+# Command Line Tool.
 
 glyfclt handler communication with solanaX Container. 
 The script install tools to support Web3 Development

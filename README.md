@@ -30,6 +30,7 @@ $ glyclt
      + dev      : Install Node,NPM and Yarn into the Container
      + login    : Access to Container 
      + reset    : Restart Container ( Stop & Start ) 
+     + release  : Show version of Tools
      + delete   : Delete Container
 + localnet      : Handler Solana Local Chain
      + run      : Run Solana Local Chain

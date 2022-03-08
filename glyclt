@@ -14,7 +14,7 @@
 
 
 SOLANA_VERSION=v1.9.5
-ANCHOR_VERSION=v0.21.0
+ANCHOR_VERSION=v0.22.1
 SOLANA_CHAIN="http://localhost:8899"
 MASTER_WALLET="/root/.config/solana/id.json"
 ALFA_WALLET="/usr/local/solana/alfa_wallet.json"
@@ -55,6 +55,7 @@ echo "${b}+ setup${n}         : Handler Container to Compile & Install Software
      + dev      : Install Node,NPM and Yarn into the Container
      + login    : Access to Container 
      + reset    : Restart Container ( Stop & Start ) 
+     + release  : Detail of version 
      + delete   : Delete Container"
 }
 
@@ -170,17 +171,18 @@ EOF
 ;;
    release)
     docker exec -i solanaX /bin/bash -s <<EOF
-   export PATH=$_path
-   echo '----------------------- Release  --------------------'
-   echo  "git            $(git --version |awk '{ print $2 }' )"
-   echo  "rustc          $(rustc -V |awk '{ print $2 }' )"
-   echo  "cargo          $(cargo -V |awk '{ print $2 }' )"
-   echo  "solana         $(solana -V |awk '{ print $2 }' )"
-   echo  "solana-keygen  $(solana-keygen -V |awk '{ print $2 }' )"
-   echo  "solana-test-validator  $(solana-test-validator --version |awk '{ print $2 }' )"
-   echo  "node           $(node --version |awk '{ print $1 }' )"  
-   echo  "npm            $(npm --version |awk '{ print $1 }' )"  
-   echo  "yarn           $(yarn --version |awk '{ print $1 }' )"  
+    export PATH=$_path
+    echo '----------------------- Release  --------------------'
+    git --version |awk '{print "git\t\t\t| " \$3 }'
+    rustc -V |awk '{print "rustc\t\t\t| " \$2 }'
+    cargo -V |awk '{print "cargo\t\t\t| " \$2 }' 
+    solana -V|awk '{print "solana-cli\t\t| " \$2 }' 
+    solana-keygen -V |awk '{print "solana-keygen\t\t| " \$2 }' 
+    solana-test-validator --version |awk '{print "solana-test-validator\t| " \$2 }'
+    anchor --version |awk '{print "anchor-cli\t\t| " \$2 }' 
+    node --version |awk '{print "node\t\t\t| " \$0 }'   
+    npm --version |awk '{print "npm\t\t\t| " \$0 }' 
+    yarn --version |awk '{print "yarn\t\t\t| " \$0 }' 
    exit
 EOF
    exit
@@ -220,9 +222,6 @@ EOF
    cd /usr/src/\$home
    rm -rf target 
    anchor build
-   echo "Generate Program ID:"
-   solana address -k target/deploy/\${home}-keypair.json
-   echo "Replace in Anchor file & lib.rs file "
    exit
 EOF
    exit

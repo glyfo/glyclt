@@ -19,8 +19,7 @@ on Solana Blockchain.
 ## 1- Install 
 
 ```console
-$ wget -O /usr/local/bin/glyclt \ 
-https://raw.githubusercontent.com/glyfo/glyclt-solana/main/glyclt
+$ wget -O /usr/local/bin/glyclt https://github.com/glyfo/glyclt/releases/download/v0.0.1/glyclt
 $ chmod +x /usr/local/bin/glyclt
 $ glyclt
   Usage: glyclt

@@ -28,7 +28,7 @@ $ glyclt
 + setup         : Handler Container to Compile & Install Software 
      + solana   : Compile & Install Solana Tools & Node into Container
      + anchor   : Compile & Install Anchor into Container
-     + dev      : Install Node,NPM and Yarn into the Container
+     + dapps    : Install DApps support into the Container
      + login    : Access to Container 
      + reset    : Restart Container ( Stop & Start ) 
      + stack    : Show All Stack Version

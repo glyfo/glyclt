@@ -21,34 +21,9 @@ on Solana Blockchain.
 ```console
 $ wget -O /usr/local/bin/glyclt https://github.com/glyfo/glyclt/releases/download/v0.0.1/glyclt
 $ chmod +x /usr/local/bin/glyclt
-$ glyclt
-  Usage: glyclt
-  ...
-  
-+ setup         : Handler Container to Compile & Install Software 
-     + solana   : Compile & Install Solana Tools & Node into Container
-     + anchor   : Compile & Install Anchor into Container
-     + dapps    : Install DApps support into the Container
-     + login    : Access to Container 
-     + reset    : Restart Container ( Stop & Start ) 
-     + stack    : Show All Stack Version
-     + delete   : Delete Container
-+ localnet      : Handler Solana Local Chain
-     + run      : Run Solana Local Chain
-     + info     : Info of Solana Local Chain
-     + status   : Validate if Solana Local Chain is Running
-     + restart  : Stop & Start Solana Local Chain
-     + log      : View Solana Local Chain Logger
-     + reset    : Delete Data of Solana Local Chain 
-+ wallet        : Handler Wallet 
-     + create   : Create Dad Moon & Sun Wallet
-     + airdrop  : Add SOL to Dad Wallet
-     + balance  : Review Wallet Balance 
-+ program       : Solana FrameWork 
-     + init     : Create Anchor Project Folder 
-     + build    : Compile Program
-     + deploy   : Deploy Program on Solana LocalNet Chain
-     + test     : Running Test 
+$ glyclt help
+...
+
 ```
 Nota : is Mandatory setup command to build solanaX Container 
 

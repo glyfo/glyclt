@@ -25,7 +25,7 @@ $ glyclt help
 ...
 
 ```
-Nota : is Mandatory setup command to build solanaX Container 
+Nota : is Mandatory running setup command to build,compile and Install all software on solanaX Container. 
 
 ## 2- Building solanaX Container 
 
@@ -36,6 +36,7 @@ The glyfolabs folder is mount point into the container path /usr/src/ .
 $ mkdir glyfolabs
 $ cd glyfolabs
 $ glyclt setup solana 
+...
 
 ```
 ## Solana Fundamentals

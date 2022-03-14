@@ -455,22 +455,37 @@ if [ "$1" = "dapp" ]
 then
    case "$2" in
   init)
-   echo -n "Name of the DAAPS [?]:"
+   echo -n "Name of the DAAP[?]:"
    read _dapp
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
-   wrangler init $_dapp --site
+   export USER=root
+   export DAPP=$_dapp
+   if wrangler generate $_dapp --site > /dev/null 
+   then
+    echo "[OK] Dapp project \$DAPP Created"
+    echo " Go into \$DAPP folder"
+   else
+    echo "[NOK] Dapp project was Building Problem"
+   fi
    exit
 EOF
 exit
 ;;
-  deploy)
-   echo -n "Name of Cloudflare user[?]:"
-   read _who
-   echo -n "Password of Cloudflare[?]:"
-   read _who
+  publish)
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
+   wrangler whoami
+   wrangler login
+   if wrangler publish > /dev/null
+   then
+    echo "[OK] Dapp published "
+    echo "[OK] Forward http to https on Cloudflare"
+    echo "[OK] Config routing on Cloudflare"
+   else
+    echo "[NOK] Dapp no published "
+   fi
+   exit 
    exit
 EOF
 exit

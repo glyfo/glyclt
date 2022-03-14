@@ -52,11 +52,11 @@ echo_setup () {
 echo "${b}+ setup${n}         : Handler Container to Compile & Install Software 
      + solana   : Compile & Install Solana Tools & Node into Container
      + anchor   : Compile & Install Anchor into Container
-     + dev      : Install Node,NPM and Yarn into the Container
+     + dapps    : Install Node,NPM and Yarn into the Container
      + login    : Access to Container 
      + reset    : Restart Container ( Stop & Start ) 
-     + release  : Detail of version 
-     + delete   : Delete Container"
+     + stack    : Show All Stack Version 
+     + delete   : Delete Container" 
 }
 
 echo_localnet () {
@@ -137,17 +137,19 @@ EOF
 EOF
    exit
 ;;
-   dev)
+   dapps)
     docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
-   echo '----------------------- Installing Developer Tools --------------------'
+   echo '----------------------- Installing DAPPS Tools --------------------'
    curl -fsSL https://deb.nodesource.com/setup_16.x | bash - > /dev/null
    apt-get -qq install -y nodejs
    npm i -g yarn                        > /dev/null
    npm i -g @project-serum/anchor-cli   > /dev/null
+   npm install -g @cloudflare/wrangler  > /dev/null
    node --version
    npm  --version 
    yarn --version
+   wrangler --version
    exit
 EOF
    exit
@@ -169,7 +171,7 @@ EOF
     docker rm solanaX
     exit
 ;;
-   release)
+   stack)
     docker exec -i solanaX /bin/bash -s <<EOF
     export PATH=$_path
     echo '----------------------- Release  --------------------'
@@ -183,6 +185,7 @@ EOF
     node --version |awk '{print "node\t\t\t| " \$0 }'   
     npm --version |awk '{print "npm\t\t\t| " \$0 }' 
     yarn --version |awk '{print "yarn\t\t\t| " \$0 }' 
+    wrangler --version |awk '{print "wrangler\t\t| " \$2 }' 
    exit
 EOF
    exit
@@ -202,13 +205,11 @@ if [ "$1" = "program" ]
 then
    case "$2" in 
    init)
-   echo -n "Project Name: " 
-   read _what
+   echo -n "Project create_account,create_pda_account" 
    docker exec -i solanaX /bin/bash -s <<EOF 
    export PATH=$_path
-   anchor init $_what
-   npm install --save @types/global-npm
-   
+   anchor init create_account
+   anchor init create_pda_account
    exit
 EOF
    exit

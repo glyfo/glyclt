@@ -23,13 +23,15 @@ $ wget -O /usr/local/bin/glyclt https://github.com/glyfo/glyclt/releases/downloa
 $ chmod +x /usr/local/bin/glyclt
 $ glyclt
   Usage: glyclt
+  ...
+  
 + setup         : Handler Container to Compile & Install Software 
      + solana   : Compile & Install Solana Tools & Node into Container
      + anchor   : Compile & Install Anchor into Container
      + dev      : Install Node,NPM and Yarn into the Container
      + login    : Access to Container 
      + reset    : Restart Container ( Stop & Start ) 
-     + release  : Show version of Tools
+     + stack    : Show All Stack Version
      + delete   : Delete Container
 + localnet      : Handler Solana Local Chain
      + run      : Run Solana Local Chain

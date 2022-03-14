@@ -42,6 +42,7 @@ echo_help () {
    echo_wallet 
    echo_localnet 
    echo_program  
+   echo_dapp  
    echo_account
    echo ""
    echo "v0.3.1"
@@ -52,7 +53,7 @@ echo_setup () {
 echo "${b}+ setup${n}         : Handler Container to Compile & Install Software 
      + solana   : Compile & Install Solana Tools & Node into Container
      + anchor   : Compile & Install Anchor into Container
-     + dapps    : Install Node,NPM and Yarn into the Container
+     + dapp     : Install Node,NPM and Yarn into the Container
      + login    : Access to Container 
      + reset    : Restart Container ( Stop & Start ) 
      + stack    : Show All Stack Version 
@@ -82,6 +83,12 @@ echo "${b}+ program${n}        : Handler Anchor Solana FrameWork
      + build    : Compile  Program
      + deploy   : Deploy Program on Solana LocalNet Chain
      + test     : Running Test"     
+}
+
+echo_dapp () {
+echo "${b}+ dapp${n}        : Handler Dapp Building 
+     + init     : Create Dapp Project 
+     + deploy   : Deploy Dapp on Clouflare Workers" 
 }
 
 echo_account () {
@@ -137,7 +144,7 @@ EOF
 EOF
    exit
 ;;
-   dapps)
+   dapp)
     docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
    echo '----------------------- Installing DAPPS Tools --------------------'
@@ -424,7 +431,7 @@ if [ "$1" = "account" ]
 then
    case "$2" in
   info)
-   echo -n "Account Publici Key [?]:"
+   echo -n "Account Public Key [?]:"
    read _who
    docker exec -i solanaX /bin/bash -s <<EOF
    export PATH=$_path
@@ -433,8 +440,43 @@ then
 EOF
 exit
 ;;
-   *) 
+   *)
    echo_account
+   exit
+;;
+esac
+fi
+
+## ----------------------  END ACCOUNT -------------------------
+
+## ----------------------  BEGIN DAPPS  -------------------------
+
+if [ "$1" = "dapp" ]
+then
+   case "$2" in
+  init)
+   echo -n "Name of the DAAPS [?]:"
+   read _dapp
+   docker exec -i solanaX /bin/bash -s <<EOF
+   export PATH=$_path
+   wrangler init $_dapp --site
+   exit
+EOF
+exit
+;;
+  deploy)
+   echo -n "Name of Cloudflare user[?]:"
+   read _who
+   echo -n "Password of Cloudflare[?]:"
+   read _who
+   docker exec -i solanaX /bin/bash -s <<EOF
+   export PATH=$_path
+   exit
+EOF
+exit
+;;
+   *) 
+   echo_dapp
    exit
 ;; 
 esac

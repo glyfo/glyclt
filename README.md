@@ -1,8 +1,7 @@
 # Command Line Tool.
 
 glyfclt handler communication with solanaX Container. 
-The script install tools to support Web3 Development
-on Solana Blockchain.
+support Web3 Development on Solana Blockchain.
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 
@@ -29,8 +28,9 @@ Nota : is Mandatory running setup command to build,compile and Install all softw
 
 ## 2- Building solanaX Container 
 
-The solanaX container installed software to support Solana Development. 
+The tools compile & install all software to support Solana Development. 
 The glyfolabs folder is mount point into the container path /usr/src/ .
+All project is created in this glyfolabs folder. 
 
 ```console
 $ mkdir glyfolabs
